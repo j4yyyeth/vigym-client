@@ -1,1 +1,1 @@
-# vigym-client
+# Vigym
