@@ -1,3 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+BLUE (lightest to darkest)
+#008DF2
+#0075C9
+#225173 
+*/
+
+/*
+MONOCHROME (lightest to darkest)
+#F7F7F7
+#587784
+#000000
+*/
+
 * {
   margin: 0;
   padding: 0
@@ -6,4 +24,39 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #F7F7F7;
+  /* background-image: url('./gym3.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; */
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  color: #0075C9;
+  background-color: rgb(212, 212, 212);
+}
+
+#logo-img {
+  width: 7rem;
+  margin-bottom: 7px;
+  margin-right: -10px;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+.logo-txt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logo-txt a:nth-child(2) {
+  margin-left: -34px;
+  font-size: 22px;
+  font-weight: 900;
 }

@@ -8,6 +8,7 @@ import Exercises from './pages/Exercises';
 import Workouts from './pages/Workouts';
 
 function App() {
+  
   return (
     <div className="App">
       <Navbar />
@@ -16,6 +17,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/exercises' element={<Exercises />} />
         <Route path='/workouts' element={<Workouts />} />
+        {/* <Route path='/' element={< />} /> */}
         <Route path='*' element={<NotFound />}/>
       </Routes>
     </div>
