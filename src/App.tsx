@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Exercises from './pages/Exercises';
 import Workouts from './pages/Workouts';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 function App() {
   
@@ -17,6 +19,8 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/exercises' element={<Exercises />} />
         <Route path='/workouts' element={<Workouts />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Login />} />
         {/* <Route path='/' element={< />} /> */}
         <Route path='*' element={<NotFound />}/>
       </Routes>
