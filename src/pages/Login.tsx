@@ -11,7 +11,6 @@ const Login = () => {
 
     const [ thisUser, setthisUser ] = useState(
         {
-            email: "",
             username: "",
             password: ""
         }
@@ -50,8 +49,6 @@ const Login = () => {
     return (
         <div className="login-form">
             <form onSubmit={handleSubmit}>
-                <label>Email</label>
-                <input type='email' name="email" value={thisUser.email} onChange={handleChange}></input>
                 <label>Username</label>
                 <input type='username' name="username" value={thisUser.username} onChange={handleChange}></input>
                 <label>Password</label>

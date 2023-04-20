@@ -9,13 +9,13 @@ const Navbar = () => {
     return localStorage.getItem('authToken')
   } 
 
-  // const { logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   // const { user } = useContext(LoadingContext);
 
   return (
     <nav>
-        <div className='logo-txt'>
+      <div className='logo-txt'>
         <Link to={'/'}><img id='logo-img' src={require('../vigym.png')} alt='logo' /></Link>
         <Link to={'/'}>iGym</Link>
       </div>
@@ -24,10 +24,12 @@ const Navbar = () => {
       <Link to={'/dashboard'}>Dashboard</Link>
       <Link to={'/signup'}>Signup</Link>
       <Link to={'/login'}>Login</Link>
+      <button onClick={logout}>Logout</button>
+      /
       {
-        getToken() ?
-        <><h1>TOKEN</h1></>
-        : <><h1>NO TOKEN</h1></>
+        getToken() 
+        ? <><h1>Token</h1></>
+        : <><h1>No Token</h1></>
       }
     </nav>
   )
