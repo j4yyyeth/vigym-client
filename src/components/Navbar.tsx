@@ -9,7 +9,7 @@ const Navbar = () => {
     return localStorage.getItem('authToken')
   } 
 
-  const { logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext) ?? {};
 
   // const { user } = useContext(LoadingContext);
 

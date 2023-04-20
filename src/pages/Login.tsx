@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
 
-    const { authenticateUser } = useContext(AuthContext)
+    const context = useContext(AuthContext);
+
+    if (!context) {
+        throw new Error("AuthContext not initialized");
+    }
+
+    const { authenticateUser } = context;
 
     const [ thisUser, setthisUser ] = useState(
         {
@@ -41,7 +47,7 @@ const Login = () => {
                 }, 1000)
             })
             .finally(() => {
-                authenticateUser()
+                authenticateUser();
             })
     } 
     

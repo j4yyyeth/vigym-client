@@ -1,13 +1,22 @@
-import { useEffect, createContext, useContext } from "react";
+import { useEffect, createContext, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { get } from "../services/authService"
 import { LoadingContext } from "./loading.context";
 
-const AuthContext = createContext();
+interface AuthContextProps {
+    authenticateUser: () => void;
+    logout: () => void;
+}
 
-const AuthProvider = ({ children }) => {
+interface AuthProviderProps {
+    children: ReactNode;
+}
 
-    const { render, setIsLoading, user, setUser, setMessage,} = useContext(LoadingContext)
+const AuthContext = createContext<AuthContextProps | null>(null);
+
+const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+
+    const { render, setIsLoading, user, setUser } = useContext(LoadingContext)
 
     const navigate = useNavigate();
 

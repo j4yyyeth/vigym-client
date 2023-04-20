@@ -44,15 +44,24 @@ nav {
   width: 7rem;
   margin-bottom: 7px;
   margin-right: -10px;
-  pointer-events: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -moz-user-select:-moz-none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 .logo-txt {
   display: flex;
   flex-direction: row;
   align-items: center;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -moz-user-select:-moz-none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 .logo-txt a:nth-child(2) {

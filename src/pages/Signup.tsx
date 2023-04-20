@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 
 const Signup = () => {
 
-    const { authenticateUser } = useContext(AuthContext)
+    const context = useContext(AuthContext);
+
+    if (!context) {
+        throw new Error("AuthContext not initialized");
+    }
+
+    const { authenticateUser } = context;
 
     const [ newUser, setNewUser ] = useState(
         {
