@@ -36,7 +36,6 @@ nav {
   flex-direction: row;
   align-items: center;
   gap: 20px;
-  color: #0075C9;
   background-color: rgb(212, 212, 212);
 }
 
@@ -52,6 +51,14 @@ nav {
   user-select:none
 }
 
+#user-img {
+  width: 3rem;
+}
+
+#user-img:hover {
+  filter: invert(34%) sepia(97%) saturate(3815%) hue-rotate(195deg);
+}
+
 .logo-txt {
   display: flex;
   flex-direction: row;
@@ -61,7 +68,8 @@ nav {
   -webkit-user-select:none;
   -moz-user-select:-moz-none;
   -ms-user-select:none;
-  user-select:none
+  user-select:none;
+  color: #0075C9;
 }
 
 .logo-txt a:nth-child(2) {

@@ -63,6 +63,7 @@ const Signup = () => {
                 <button type="submit">Sign Up</button>
                 <h4 className="err-msg">{message}</h4>
             </form>
+            <p>Already a user? <Link to="/login">Log In</Link></p>
         </div>
     )
 }
