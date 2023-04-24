@@ -18,7 +18,7 @@ interface LoadingContextProps {
   getExercisesLibrary: () => void;
 }
 
-interface Exercises {
+export interface Exercises {
   bodyPart: string,
   equipment: string,
   gifUrl: string,
