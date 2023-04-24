@@ -1,7 +1,7 @@
 import { useEffect, createContext, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { get } from "../services/authService"
-import { LoadingContext } from "./loading.context";
+import { LoadingContext } from "./loadingContext";
 
 interface AuthContextProps {
     authenticateUser: () => void;
@@ -12,11 +12,25 @@ interface AuthProviderProps {
     children: ReactNode;
 }
 
+export interface User {
+    email: string;
+    username: string;
+    password: string;
+
+}
+
+interface LoadingContextProps {
+    render: boolean;
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    user: User | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
+
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
-    const { render, setIsLoading, user, setUser } = useContext(LoadingContext)
+    const { render, setIsLoading, user, setUser } = useContext(LoadingContext) as LoadingContextProps;
 
     const navigate = useNavigate();
 

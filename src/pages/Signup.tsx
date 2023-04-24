@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { post } from "../services/authService";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../context/authContext";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
