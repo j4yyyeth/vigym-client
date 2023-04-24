@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import { AuthContext } from "../context/authContext";
 import logo from '../vigym.png';
-import userImg from '../user.png';
 
 const Navbar = () => {
 
@@ -23,11 +22,19 @@ const Navbar = () => {
       </div>
       <Link to={'/exercises'}>Exercises</Link>
       <Link to={'/workouts'}>Workouts</Link>
-      <Link to={'/dashboard'}>Dashboard</Link>
+      <Link to={'/store'}>Store</Link>
       {
         getToken() 
-        ? <button onClick={logout}>Logout</button>
-        : <Link to={'/signup'}><img id='user-img' src={userImg} alt='Sign In' /></Link>
+        ? 
+          <>
+            <button onClick={logout}>Logout</button>
+            <Link to={'/dashboard'}>Dashboard</Link>
+          </>
+        : 
+          <>
+            <Link to={'/login'}>Sign in</Link>
+            <Link id='start-action-call'  to={'/signup'}>Get Started</Link>
+          </>
       }
     </nav>
   )

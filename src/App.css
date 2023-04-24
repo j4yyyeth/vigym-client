@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 /* 
 BLUE (lightest to darkest)
 #008DF2
@@ -25,6 +28,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #F7F7F7;
+  font-family: 'Montserrat', sans-serif;
   /* background-image: url('./gym3.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -35,8 +39,16 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
-  background-color: rgb(212, 212, 212);
+  gap: 3rem;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 1.3px;
+  color: #0075C9;
+}
+
+nav a:hover {
+  color: #008DF2;
+  transition: .3s;
 }
 
 #logo-img {
@@ -51,13 +63,9 @@ nav {
   user-select:none
 }
 
-#user-img {
-  width: 3rem;
-}
-
-#user-img:hover {
+/* #user-img:hover {
   filter: invert(34%) sepia(97%) saturate(3815%) hue-rotate(195deg);
-}
+} */
 
 .logo-txt {
   display: flex;
@@ -72,8 +80,24 @@ nav {
   color: #0075C9;
 }
 
+.logo-txt:hover {
+  color: #0075C9;
+}
+
 .logo-txt a:nth-child(2) {
-  margin-left: -34px;
-  font-size: 22px;
-  font-weight: 900;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-left: -32px;
+}
+
+#start-action-call {
+  background-color: #0075C9;
+  padding: 5px;
+  color: #F7F7F7;
+}
+
+#start-action-call:hover {
+  background-color: #008DF2;
+  transition: .3s;
 }
