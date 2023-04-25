@@ -31,6 +31,8 @@ const CreateWorkouts = () => {
             console.log('User not available');
             return;
         }
+        const url = `${baseUrl}/workouts/create/${user._id}`;
+        console.log('Submitting workout to URL:', url);
         try {
             const response = await fetch(`${baseUrl}/workouts/create/${user._id}`, {
                 method: 'POST',
@@ -48,6 +50,7 @@ const CreateWorkouts = () => {
             console.log('Error:', error);
         }
     };
+    
     return (
             <div>
                 <h1>Create Workouts</h1>
@@ -92,9 +95,13 @@ const CreateWorkouts = () => {
                         <p>Sets: {exercise.sets}</p>
                         <p>Reps: {exercise.reps}</p>
                         <p>Weight: {exercise.weight}</p>
+                        <br></br>
+                        <br></br>
                     </div>
                 ))}
             </div>
+            <br></br>
+            <br></br>
             <button onClick={submitWorkout}>Submit Workout</button>
         </div>
     );        
