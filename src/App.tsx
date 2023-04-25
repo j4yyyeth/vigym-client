@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Exercises from './pages/Exercises';
 import Workouts from './pages/Workouts';
+import CreateWorkouts from './pages/CreateWorkout';
 import Store from './pages/Store';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/store' element={<Store />} />
         <Route path='*' element={<NotFound />}/>
+        <Route path='/create-workout' element={<CreateWorkouts />} />
       </Routes>
     </div>
   );

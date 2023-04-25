@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom"
+
 const Workouts = () => {
   return (
-    <div>Workouts</div>
+    <div>
+      <h3>Workouts</h3>
+      <Link to={'/create-workout'}>Create A Workout</Link>
+    </div>
   )
 }
 

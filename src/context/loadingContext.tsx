@@ -6,10 +6,10 @@ interface LoadingProviderProps {
   children: ReactNode;
 }
 
-interface LoadingContextProps {
+export interface LoadingContextProps {
   render: boolean;
   setRender: React.Dispatch<React.SetStateAction<boolean>>;
-  user: User | null;
+  user: User | null
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;

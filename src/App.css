@@ -80,15 +80,15 @@ nav a:hover {
   color: #0075C9;
 }
 
-.logo-txt:hover {
-  color: #0075C9;
-}
-
 .logo-txt a:nth-child(2) {
   font-family: 'Bebas Neue', cursive;
   font-size: 1.8rem;
   font-weight: 800;
   margin-left: -32px;
+}
+
+.logo-txt a:nth-child(2):hover {
+  color: #0075C9;
 }
 
 #start-action-call {
