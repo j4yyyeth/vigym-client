@@ -28,23 +28,22 @@ const Workouts = () => {
 
   useEffect(() => {
     const fetchAllWorkouts = async () => {
-
       try {
         const response = await fetch(`${baseUrl}/workouts/all`);
-
+  
         if (response.ok) {
           const data = await response.json();
-          const allWorkouts = data.map((user: User)=> user.workouts).flat();
-          setWorkouts(allWorkouts);
+          setWorkouts(data);
         } else {
-          console.log("Error fetching workouts");
+          console.log("Error");
         }
-      } catch (error) {
-        console.log("Error:", error);
+      } catch (err) {
+        console.log(err);
       }
     };
     fetchAllWorkouts();
   }, []);
+  
 
   return (
     <div>
@@ -52,7 +51,8 @@ const Workouts = () => {
     <Link to={"/create-workout"}>Create A Workout</Link>
     <div>
       <br></br>
-      {workouts.map((workout, index) => workout.exercises ? (
+      {workouts.map((workout, index) => (
+        workout && workout.exercises ? (
         <div key={index}>
           <h4>Workout {index + 1}</h4>
           {workout.exercises.map((exercise, i) => (
@@ -64,7 +64,8 @@ const Workouts = () => {
             </div>
           ))}
         </div>
-      ) : null)}
+        ) : null
+      ))}
       <br></br>
     </div>
   </div>
