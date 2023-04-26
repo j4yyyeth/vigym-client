@@ -39,22 +39,23 @@ const Dashboard = () => {
     }
     fetchUserWorkouts();
   }, [user]);
+  console.log(workouts);
 
   return (
     <div>
       <h3>My Dashboard</h3>
       {
         workouts.map((workout, i) => (
-          <div key={i}>
-            {workout.exercises.map((exercise, i) => (
-              <div key={i}>
-                <h4>Workout</h4>
-                <h5>{exercise.exercise}</h5>
-                <p>Sets: {exercise.sets}</p>
-                <p>Reps: {exercise.reps}</p>
-                <p>Weight: {exercise.weight}</p>
-              </div>
-            ))}
+          <div className="all-workouts" key={i}>
+            <h4>Workout {i + 1}</h4>
+            {workout.exercises.map((exercise, j) => (
+            <div key={j}>
+              <h5>{exercise.exercise}</h5>
+              <p>Sets: {exercise.sets}</p>
+              <p>Reps: {exercise.reps}</p>
+              <p>Weight: {exercise.weight}</p>
+            </div>
+          ))}
           </div>
         ))
       }
