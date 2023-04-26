@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { LoadingContext } from "../context/loadingContext";
+import { useState, useEffect } from "react";
 import { baseUrl } from "../services/baseUrl";
 
 interface Exercise {
@@ -15,23 +14,28 @@ interface Workout {
   exercises: Exercise[];
 }
 
+interface User {
+  _id: string;
+  email: string;
+  username: string;
+  password: string;
+  workouts: Workout[];
+}
+
+
 const Workouts = () => {
-  const { user } = useContext(LoadingContext) || {};
   const [workouts, setWorkouts] = useState<Workout[]>([]);
 
   useEffect(() => {
-    const fetchWorkouts = async () => {
-      if (!user) {
-        console.log("User not available");
-        return;
-      }
+    const fetchAllWorkouts = async () => {
 
       try {
-        const response = await fetch(`${baseUrl}/workouts/user/${user._id}`);
+        const response = await fetch(`${baseUrl}/workouts/all`);
 
         if (response.ok) {
           const data = await response.json();
-          setWorkouts(data);
+          const allWorkouts = data.map((user: User)=> user.workouts).flat();
+          setWorkouts(allWorkouts);
         } else {
           console.log("Error fetching workouts");
         }
@@ -39,8 +43,8 @@ const Workouts = () => {
         console.log("Error:", error);
       }
     };
-    fetchWorkouts();
-  }, [user]);
+    fetchAllWorkouts();
+  }, []);
 
   return (
     <div>
@@ -48,7 +52,7 @@ const Workouts = () => {
     <Link to={"/create-workout"}>Create A Workout</Link>
     <div>
       <br></br>
-      {workouts.map((workout, index) => (
+      {workouts.map((workout, index) => workout.exercises ? (
         <div key={index}>
           <h4>Workout {index + 1}</h4>
           {workout.exercises.map((exercise, i) => (
@@ -60,7 +64,7 @@ const Workouts = () => {
             </div>
           ))}
         </div>
-      ))}
+      ) : null)}
       <br></br>
     </div>
   </div>
