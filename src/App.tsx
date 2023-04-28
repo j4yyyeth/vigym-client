@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Routes, Outlet, Navigate } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
+import MusicPlayer from './components/MusicPlayer';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Exercises from './pages/Exercises';
@@ -43,6 +44,7 @@ function App() {
         </Route>
         <Route path='*' element={<NotFound />}/>
       </Routes>
+      {/* <MusicPlayer /> */}
     </div>
   );
 }

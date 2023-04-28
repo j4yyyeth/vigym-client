@@ -127,4 +127,14 @@ nav a:hover {
   justify-content: center;
   align-items: center;
   border: 1px solid black;
+  text-align: center;
+}
+
+#music-player {
+  border: 1px solid red;
+}
+
+.dlt-btn {
+  background-color: red;
+  color: white;
 }

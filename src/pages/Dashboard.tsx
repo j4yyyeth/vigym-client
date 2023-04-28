@@ -48,14 +48,17 @@ const Dashboard = () => {
         workouts.map((workout, i) => (
           <div className="all-workouts" key={i}>
             <h4>Workout {i + 1}</h4>
+            <br></br>
             {workout.exercises.map((exercise, j) => (
             <div key={j}>
               <h5>{exercise.exercise}</h5>
               <p>Sets: {exercise.sets}</p>
               <p>Reps: {exercise.reps}</p>
               <p>Weight: {exercise.weight}</p>
+              <br></br>
             </div>
           ))}
+          <button className="dlt-btn">Delete</button>
           </div>
         ))
       }
