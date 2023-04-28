@@ -1,9 +1,11 @@
 import { useContext, useEffect } from "react";
 import { LoadingContext } from "../context/loadingContext";
+import axios from "axios";
+import { baseUrl } from "../services/baseUrl";
 
 const Dashboard = () => {
 
-  const { user, workouts, getUserWorkouts } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { user, setUser, workouts, getUserWorkouts } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
 
   useEffect(() => {
     if (user) {
@@ -12,11 +14,17 @@ const Dashboard = () => {
   }, [user]);  
 
 
-  // const handleDelete = () => {
-  //   try {
-  //     const response = await get(`${baseUrl}/workouts/delete/${user._id}`)
-  //   }
-  // }
+  const handleDelete = (workoutId: string) => {
+    console.log('Workout ID:', workoutId)
+    axios.delete(`${baseUrl}/workouts/delete/${workoutId}`)
+      .then(() => {
+        console.log('deleted')
+        getUserWorkouts();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (
     <div>
@@ -35,7 +43,7 @@ const Dashboard = () => {
               <br></br>
             </div>
           ))}
-          <button className="dlt-btn">Delete</button>
+          <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
           </div>
         ))
       }
