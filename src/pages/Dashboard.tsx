@@ -1,51 +1,30 @@
 import { useState, useContext, useEffect } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import { baseUrl } from '../services/baseUrl';
-
-interface Exercise {
-  exercise: string,
-  sets: number,
-  reps: number,
-  weight: number
-}
-
-interface Workout {
-  _id: string;
-  exercises: Exercise[];
-}
+import { get, post } from "../services/authService";
 
 const Dashboard = () => {
 
-  const { user } = useContext(LoadingContext) || {};
-  const [ workouts, setWorkouts ] = useState<Workout[]>([]);
+  const { user, workouts, getUserWorkouts } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
 
   useEffect(() => {
-    if (!user) {
-      return;
+    if (user) {
+      getUserWorkouts();
     }
+  }, [user]);  
 
-    const fetchUserWorkouts = async () => {
-      try {
-        const response = await fetch(`${baseUrl}/workouts/user/${user._id}`);
-        if (response.ok) {
-          const data = await response.json();
-          setWorkouts(data);
-        } else {
-          console.log("Error");
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    fetchUserWorkouts();
-  }, [user]);
-  console.log(workouts);
+
+  // const handleDelete = async () => {
+  //   try {
+  //     const response = await get(`${baseUrl}/workouts/delete/${user._id}`)
+  //   }
+  // }
 
   return (
     <div>
       <h3>My Dashboard</h3>
       {
-        workouts.map((workout, i) => (
+        workouts?.map((workout, i) => (
           <div className="all-workouts" key={i}>
             <h4>Workout {i + 1}</h4>
             <br></br>

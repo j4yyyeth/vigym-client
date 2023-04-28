@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import { baseUrl } from '../services/baseUrl';
+import { useNavigate } from "react-router-dom";
 
 interface Exercise {
     exercise: string;
@@ -10,6 +11,8 @@ interface Exercise {
 }
 
 const CreateWorkouts = () => {
+
+    const navigate = useNavigate();
 
     const {  user } = useContext(LoadingContext) || {};
 
@@ -42,6 +45,7 @@ const CreateWorkouts = () => {
     
             if (response.ok) {
                 const result = await response.json();
+                navigate('/dashboard');
                 console.log(result);
             } else {
                 console.log('Error submitting workout');
