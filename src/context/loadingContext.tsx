@@ -17,6 +17,9 @@ export interface LoadingContextProps {
   exerciseLibrary: Array<Exercises>;
   setExerciseLibrary: React.Dispatch<React.SetStateAction<Array<Exercises>>>;
   getExercisesLibrary: () => void;
+  allWorkouts: Workout[];
+  setAllWorkouts: React.Dispatch<React.SetStateAction<Workout[]>>;
+  getAllWorkouts: () => void;
   workouts: Workout[];
   setWorkouts: React.Dispatch<React.SetStateAction<Workout[]>>;
   getUserWorkouts: () => void;
@@ -51,6 +54,7 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [ render, setRender ] = useState(false);
     const [ exerciseLibrary, setExerciseLibrary ] = useState<Array<Exercises>>([]);
+    const [ allWorkouts, setAllWorkouts ] = useState<Workout[]>([]);
     const [ workouts, setWorkouts ] = useState<Workout[]>([]);
 
     const getExercisesLibrary = () => {
@@ -60,6 +64,16 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       })
       .catch((err) => {
         console.log(err)
+      })
+    }
+
+    const getAllWorkouts = () => {
+      get('/workouts/all')
+      .then((results) => {
+        setAllWorkouts(results.data);
+      })
+      .catch((err) => {
+        console.log(err);
       })
     }
 
@@ -78,7 +92,7 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
     }
 
     return (
-      <LoadingContext.Provider value={{render, setRender, user, setUser, isLoading, setIsLoading, exerciseLibrary, setExerciseLibrary, getExercisesLibrary, workouts, setWorkouts, getUserWorkouts}}>
+      <LoadingContext.Provider value={{render, setRender, user, setUser, isLoading, setIsLoading, exerciseLibrary, setExerciseLibrary, getExercisesLibrary, allWorkouts, setAllWorkouts, getAllWorkouts, workouts, setWorkouts, getUserWorkouts}}>
           {children}
         </LoadingContext.Provider>
       );

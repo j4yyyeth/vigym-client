@@ -1,7 +1,5 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { LoadingContext } from "../context/loadingContext";
-import { baseUrl } from '../services/baseUrl';
-import { get, post } from "../services/authService";
 
 const Dashboard = () => {
 
@@ -14,7 +12,7 @@ const Dashboard = () => {
   }, [user]);  
 
 
-  // const handleDelete = async () => {
+  // const handleDelete = () => {
   //   try {
   //     const response = await get(`${baseUrl}/workouts/delete/${user._id}`)
   //   }
