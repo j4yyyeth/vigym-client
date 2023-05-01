@@ -1,11 +1,14 @@
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import axios from "axios";
+import { post } from "../services/authService";
 import { baseUrl } from "../services/baseUrl";
+import ExerciseInput from "../components/ExerciseInput";
 
 const Dashboard = () => {
 
-  const { user, setUser, workouts, getUserWorkouts } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { user, workouts, getUserWorkouts } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
 
   useEffect(() => {
     if (user) {
@@ -15,16 +18,26 @@ const Dashboard = () => {
 
 
   const handleDelete = (workoutId: string) => {
-    console.log('Workout ID:', workoutId)
     axios.delete(`${baseUrl}/workouts/delete/${workoutId}`)
       .then(() => {
-        console.log('deleted')
         getUserWorkouts();
       })
       .catch((err) => {
         console.log(err);
       })
   }
+
+  const handleEdit = (workoutId: any) => {
+    const workoutToUpdate = updatedWorkouts.find((e) => e._id === workoutId);
+    axios
+      .put(`${baseUrl}/workouts/edit/${workoutId}`, {workout: workoutToUpdate})
+      .then(() => {
+        getUserWorkouts();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -35,20 +48,33 @@ const Dashboard = () => {
             <h4>Workout {i + 1}</h4>
             <br></br>
             {workout.exercises.map((exercise, j) => (
-            <div key={j}>
-              <h5>{exercise.exercise}</h5>
-              <p>Sets: {exercise.sets}</p>
-              <p>Reps: {exercise.reps}</p>
-              <p>Weight: {exercise.weight}</p>
-              <br></br>
-            </div>
-          ))}
-          <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
+              <ExerciseInput
+                key={j}
+                exercise={exercise.exercise}
+                sets={exercise.sets}
+                reps={exercise.reps}
+                weight={exercise.weight}
+                onInputChange={(field, value) => {
+                  const newWorkouts = [...updatedWorkouts];
+                  if (!newWorkouts[i]) {
+                    newWorkouts[i] = { ...workout };
+                  }
+                  newWorkouts[i].exercises[j] = {
+                    ...newWorkouts[i].exercises[j],
+                    [field]: value,
+                  };
+                  setUpdatedWorkouts(newWorkouts);
+                }}
+              />
+            ))}
+            <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
+            <button className="edit-btn" onClick={() => { console.log('Workout ID:', workout._id); handleEdit(workout._id) }}>Save</button>
           </div>
         ))
       }
     </div>
   )
+  
 }
 
 export default Dashboard

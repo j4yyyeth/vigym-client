@@ -7,7 +7,7 @@ const Exercises = () => {
   const { exerciseLibrary, getExercisesLibrary } = useContext(LoadingContext) || {};
 
   useEffect(() => {
-    getExercisesLibrary?.();
+    getExercisesLibrary?.()
   }, []);
 
   return (

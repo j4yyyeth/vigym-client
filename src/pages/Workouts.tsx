@@ -13,6 +13,7 @@ const Workouts = () => {
 
   return (
     <div>
+      <Link to={'/create-workout'}>Create a Workout</Link>
       <h3>All Workouts</h3>
       {
         allWorkouts?.map((workout, i) => (
