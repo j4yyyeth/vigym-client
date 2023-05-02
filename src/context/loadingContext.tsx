@@ -23,6 +23,7 @@ export interface LoadingContextProps {
   workouts: Workout[];
   setWorkouts: React.Dispatch<React.SetStateAction<Workout[]>>;
   getUserWorkouts: () => void;
+  updateWorkout: (updatedWorkout: Workout) => void;
 }
 
 export interface Exercises {
@@ -67,6 +68,18 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       })
     }
 
+    const updateWorkout = (updatedWorkout: Workout) => {
+      // Find the index of the workout to update in the current state
+      const workoutIndex = workouts.findIndex((workout) => workout._id === updatedWorkout._id);
+    
+      // Replace the old workout data with the updated workout data
+      const newWorkouts = [...workouts];
+      newWorkouts[workoutIndex] = updatedWorkout;
+    
+      // Update the state
+      setWorkouts(newWorkouts);
+    };
+
     const getAllWorkouts = () => {
       get('/workouts/all')
       .then((results) => {
@@ -90,9 +103,10 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       })
 
     }
+    
 
     return (
-      <LoadingContext.Provider value={{render, setRender, user, setUser, isLoading, setIsLoading, exerciseLibrary, setExerciseLibrary, getExercisesLibrary, allWorkouts, setAllWorkouts, getAllWorkouts, workouts, setWorkouts, getUserWorkouts}}>
+      <LoadingContext.Provider value={{render, setRender, user, setUser, isLoading, setIsLoading, exerciseLibrary, setExerciseLibrary, getExercisesLibrary, allWorkouts, setAllWorkouts, getAllWorkouts, workouts, setWorkouts, getUserWorkouts, updateWorkout}}>
           {children}
         </LoadingContext.Provider>
       );

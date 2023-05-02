@@ -7,7 +7,7 @@ import ExerciseInput from "../components/ExerciseInput";
 
 const Dashboard = () => {
 
-  const { user, workouts, getUserWorkouts } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { user, workouts, getUserWorkouts, updateWorkout } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
   const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -30,14 +30,16 @@ const Dashboard = () => {
   const handleEdit = (workoutId: any) => {
     const workoutToUpdate = updatedWorkouts.find((e) => e._id === workoutId);
     axios
-      .put(`${baseUrl}/workouts/edit/${workoutId}`, {workout: workoutToUpdate})
-      .then(() => {
-        getUserWorkouts();
+      .put(`${baseUrl}/workouts/edit/${workoutId}`, { workout: workoutToUpdate })
+      .then((response) => {
+        const updatedWorkout = response.data.updatedWorkout;
+        updateWorkout?.(updatedWorkout);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  
 
   return (
     <div>
