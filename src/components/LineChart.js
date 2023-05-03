@@ -5,38 +5,26 @@ import { LoadingContext } from "../context/loadingContext";
 
 const labels = ["Sets", "Reps", "Weight"];
 
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: "Pushups",
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgb(255, 99, 132)",
-      data: [3, 15, 0]
-    },
-    {
-      label: "Pull-ups",
-      backgroundColor: "rgb(155, 200, 132)",
-      borderColor: "rgb(155, 200, 132)",
-      data: [3, 10, 30]
-    },
-    {
-      label: "Squats",
-      backgroundColor: "rgb(155, 155, 150)",
-      borderColor: "rgb(155, 155, 150)",
-      data: [4, 5, 75]
-    }
-  ],
-};
-
 const LineChart = () => {
 
   const { workouts } = useContext(LoadingContext);
+  const generateDatasets = (workouts) => {
+    return workouts[0].exercises.map((e) => ({
+      label: e.exercise,
+      backgroundColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
+      borderColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
+      data: [e.sets, e.reps, e.weight],
+    }));
+  };
+
+  const data = {
+    labels: labels,
+    datasets: workouts && workouts.length > 0 ? generateDatasets(workouts) : []
+  };
 
   return (
     <div>
       <Line data={data} />
-      <h1>{data.labels}</h1>
     </div>
   );
 };
