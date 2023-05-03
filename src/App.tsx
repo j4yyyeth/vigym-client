@@ -11,6 +11,7 @@ import CreateWorkouts from './pages/CreateWorkout';
 import Store from './pages/Store';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Trainer from './pages/Trainer';
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
         <Route path='/store' element={<Store />} />
         <Route element={<LoggedIn />}>
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/trainer' element={<Trainer />} />
           <Route path='/create-workout' element={<CreateWorkouts />} />
         </Route>
         <Route path='*' element={<NotFound />}/>

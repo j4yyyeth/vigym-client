@@ -24,6 +24,11 @@ const Navbar = () => {
       }
       <Link to={'/exercises'}>Exercises</Link>
       <Link to={'/workouts'}>Workouts</Link>
+      {
+        getToken()
+        ? <Link to={'/trainer'}>AI Trainer</Link>
+        : <></>
+      }
       <Link to={'/store'}>Store</Link>
       {
         getToken() 
