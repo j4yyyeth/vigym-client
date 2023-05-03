@@ -75,7 +75,9 @@ const Dashboard = () => {
           </div>
         ))
       }
-      <LineChart />
+      <div style={{ width: '52%', height: '52%' }}>
+        <LineChart />
+      </div>
     </div>
   )
   
