@@ -11,7 +11,7 @@ const LineChart = () => {
   const generateDatasets = (workouts) => {
     return workouts[0].exercises.map((e) => ({
       label: e.exercise,
-      backgroundColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
+      backgroundColor: 'white',
       borderColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
       data: [e.sets, e.reps, e.weight],
     }));
