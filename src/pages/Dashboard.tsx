@@ -4,6 +4,7 @@ import axios from "axios";
 import { post } from "../services/authService";
 import { baseUrl } from "../services/baseUrl";
 import ExerciseInput from "../components/ExerciseInput";
+import LineChart from "../components/LineChart";
 
 const Dashboard = () => {
 
@@ -74,6 +75,7 @@ const Dashboard = () => {
           </div>
         ))
       }
+      <LineChart />
     </div>
   )
   
