@@ -8,7 +8,7 @@ import BarChart from "../components/BarChart";
 
 const Dashboard = () => {
 
-  const { user, workouts, getUserWorkouts, updateWorkout } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { user, setUser, workouts, getUserWorkouts, updateWorkout } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
   const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -35,6 +35,8 @@ const Dashboard = () => {
       .then((response) => {
         const updatedWorkout = response.data.updatedWorkout;
         updateWorkout?.(updatedWorkout);
+        const newUpdatedWorkouts = updatedWorkouts.filter(workout => workout._id !== workoutId);
+        setUpdatedWorkouts(newUpdatedWorkouts);
       })
       .catch((err) => {
         console.log(err);
@@ -70,8 +72,8 @@ const Dashboard = () => {
                 }}
               />
             ))}
-            <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
-            <button className="edit-btn" onClick={() =>handleEdit(workout._id)}>Save</button>
+              <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
+              <button className="edit-btn" onClick={()=>handleEdit(workout._id)}>Save</button>
           </div>
         ))
       }

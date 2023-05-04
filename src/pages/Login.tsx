@@ -66,7 +66,7 @@ const Login = () => {
                     </button>
                     <h4 className="err-msg text-red-500 text-center">{message}</h4>
                 </form>
-                <p className="mt-2 text-center text-sm text-gray-600">Already a user?{' '}<Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">Log In</Link></p>
+                <p className="mt-2 text-center text-sm text-gray-600">No account?{' '}<Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">Sign Up</Link></p>
             </div>
         </div>
     )
