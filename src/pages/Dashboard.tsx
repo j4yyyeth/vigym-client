@@ -77,9 +77,13 @@ const Dashboard = () => {
           </div>
         ))
       }
-      <div style={{ width: '52%', height: '52%' }}>
-        <BarChart />
-      </div>
+      {
+        workouts && workouts.length > 0 ? 
+        <div style={{ width: '52%', height: '52%' }}>
+          <BarChart />
+        </div> 
+        : <></>
+      }
     </div>
   )
 }
