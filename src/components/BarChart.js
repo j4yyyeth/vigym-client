@@ -1,19 +1,20 @@
 import Chart from "chart.js/auto";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { useContext } from "react";
 import { LoadingContext } from "../context/loadingContext";
 
 const labels = ["Sets", "Reps", "Weight"];
 
-const LineChart = () => {
+const BarChart = () => {
 
   const { workouts } = useContext(LoadingContext);
-  const generateDatasets = (workouts) => {
+  const generateDatasets = (workouts) => { // Workouts is an array. User presses a button to display one of their workouts
     return workouts[0].exercises.map((e) => ({
       label: e.exercise,
-      backgroundColor: 'white',
-      borderColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
-      data: [e.sets, e.reps, e.weight],
+      backgroundColor: `rgb(${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 200)}, ${Math.floor(Math.random() * 256)})`,
+      borderColor: 'black',
+      borderWidth: 1,
+      data: [e.sets, e.reps, e.weight]
     }));
   };
 
@@ -24,9 +25,9 @@ const LineChart = () => {
 
   return (
     <div>
-      <Line data={data} />
+      <Bar data={data} />
     </div>
   );
 };
 
-export default LineChart;
+export default BarChart;

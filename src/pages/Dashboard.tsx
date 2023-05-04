@@ -4,7 +4,7 @@ import axios from "axios";
 import { post } from "../services/authService";
 import { baseUrl } from "../services/baseUrl";
 import ExerciseInput from "../components/ExerciseInput";
-import LineChart from "../components/LineChart";
+import LineChart from "../components/BarChart";
 
 const Dashboard = () => {
 

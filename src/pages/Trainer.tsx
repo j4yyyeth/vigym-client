@@ -7,6 +7,7 @@ const Trainer = () => {
   const [ AIMessage, setAIMessage ] = useState('');
 
   const sendMessage = async () => {
+    setUserMessage('');
     try {
       const response = await fetch(`${baseUrl}/trainer`, {
         method: 'POST',
