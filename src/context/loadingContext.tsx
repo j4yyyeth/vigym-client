@@ -98,14 +98,13 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       .catch((err) => {
         console.log(err)
       })
-
     }
 
     return (
       <LoadingContext.Provider value={{render, setRender, user, setUser, isLoading, setIsLoading, exerciseLibrary, setExerciseLibrary, getExercisesLibrary, allWorkouts, setAllWorkouts, getAllWorkouts, workouts, setWorkouts, getUserWorkouts, updateWorkout}}>
-          {children}
-        </LoadingContext.Provider>
-      );
+        {children}
+      </LoadingContext.Provider>
+    );
 }
 
 export { LoadingContext, LoadingProvider }

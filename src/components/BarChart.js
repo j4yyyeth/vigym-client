@@ -29,9 +29,9 @@ const BarChart = () => {
   };
 
   return (
-    <div>
+    <>
       {workouts && workouts.length > 0 && (
-        <div>
+        <>
           <br></br>
           <label htmlFor="workout-select">Select Workout: </label>
           <br></br>
@@ -42,10 +42,10 @@ const BarChart = () => {
               </option>
             ))}
           </select>
-        </div>
+        </>
       )}
       <Bar data={data} />
-    </div>
+    </>
   );
 };
 

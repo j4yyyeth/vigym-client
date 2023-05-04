@@ -4,7 +4,7 @@ import axios from "axios";
 import { post } from "../services/authService";
 import { baseUrl } from "../services/baseUrl";
 import ExerciseInput from "../components/ExerciseInput";
-import LineChart from "../components/BarChart";
+import BarChart from "../components/BarChart";
 
 const Dashboard = () => {
 
@@ -29,7 +29,7 @@ const Dashboard = () => {
   }
 
   const handleEdit = (workoutId: any) => {
-    const workoutToUpdate = updatedWorkouts.find((e) => e._id === workoutId);
+    const workoutToUpdate = workouts?.find((e) => e._id === workoutId);
     axios
       .put(`${baseUrl}/workouts/edit/${workoutId}`, { workout: workoutToUpdate })
       .then((response) => {
@@ -40,6 +40,7 @@ const Dashboard = () => {
         console.log(err);
       });
   };
+  
 
   return (
     <div>
@@ -70,16 +71,15 @@ const Dashboard = () => {
               />
             ))}
             <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
-            <button className="edit-btn" onClick={() => { console.log('Workout ID:', workout._id); handleEdit(workout._id) }}>Save</button>
+            <button className="edit-btn" onClick={() =>handleEdit(workout._id)}>Save</button>
           </div>
         ))
       }
       <div style={{ width: '52%', height: '52%' }}>
-        <LineChart />
+        <BarChart />
       </div>
     </div>
   )
-  
 }
 
 export default Dashboard
