@@ -1,7 +1,6 @@
 import { useState, createContext, ReactNode } from "react";
-import { get, post } from "../services/authService";
+import { get} from "../services/authService";
 import { User } from "./authContext";
-import { baseUrl } from "../services/baseUrl";
 
 interface LoadingProviderProps {
   children: ReactNode;

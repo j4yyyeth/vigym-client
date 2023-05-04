@@ -5,10 +5,11 @@ import { post } from "../services/authService";
 import { baseUrl } from "../services/baseUrl";
 import ExerciseInput from "../components/ExerciseInput";
 import BarChart from "../components/BarChart";
+import Calendar from "../components/Calendar";
 
 const Dashboard = () => {
 
-  const { user, setUser, workouts, getUserWorkouts, updateWorkout } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { user, workouts, getUserWorkouts, updateWorkout } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
   const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -84,6 +85,8 @@ const Dashboard = () => {
         </div> 
         : <></>
       }
+      <h3>My Calendar</h3>
+      <Calendar workouts={workouts} />
     </div>
   )
 }
