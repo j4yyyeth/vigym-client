@@ -40,7 +40,6 @@ const Dashboard = () => {
         console.log(err);
       });
   };
-  
 
   return (
     <div>
