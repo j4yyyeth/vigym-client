@@ -86,7 +86,7 @@ const Dashboard = () => {
         : <></>
       }
       <h3>My Calendar</h3>
-      <Calendar workouts={workouts} />
+      <Calendar workouts={workouts} user={user} />
     </div>
   )
 }
