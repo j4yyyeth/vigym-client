@@ -12,6 +12,7 @@ import Store from './pages/Store';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Trainer from './pages/Trainer';
+import Comments from './pages/Comments';
 
 function App() {
 
@@ -31,20 +32,25 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
+
         <Route path='/' element={<Home />} />
+        {/* <Route path='/exercises' element={<Exercises />} /> */}
+        <Route path='/workouts' element={<Workouts />} />
+        <Route path='/store' element={<Store />} />
+
         <Route element={<LoggedOut />}>
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
         </Route>
-        {/* <Route path='/exercises' element={<Exercises />} /> */}
-        <Route path='/workouts' element={<Workouts />} />
-        <Route path='/store' element={<Store />} />
+
         <Route element={<LoggedIn />}>
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/trainer' element={<Trainer />} />
           <Route path='/create-workout' element={<CreateWorkouts />} />
+          <Route path='/comments/:workoutId' element={<Comments />} />
         </Route>
         <Route path='*' element={<NotFound />}/>
+
       </Routes>
       {/* <MusicPlayer /> */}
     </div>

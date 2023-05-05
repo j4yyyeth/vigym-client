@@ -21,8 +21,8 @@ const MusicPlayer = () => {
           <h2>Playing Now</h2>
           <img className="musicCover" src="" alt='cover'/>
           <div>
-            <h3 className="title">Rubaiyyan</h3>
-            <p className="subTitle">Qala</p>
+            <h3 className="title">SONG</h3>
+            <p className="subTitle">SONG</p>
           </div>
           <div>
             <button className="playButton">
