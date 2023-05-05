@@ -53,7 +53,6 @@ const Comments: React.FC = () => {
     }
   };  
   
-
   return (
     <div>
       <Link to={'/workouts'}>Back</Link>

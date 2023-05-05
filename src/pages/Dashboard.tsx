@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import axios from "axios";
-import { post } from "../services/authService";
 import { baseUrl } from "../services/baseUrl";
 import ExerciseInput from "../components/ExerciseInput";
+import CardioInput from "../components/CardioInput";
 import BarChart from "../components/BarChart";
 import Calendar from "../components/Calendar";
 
@@ -28,8 +28,23 @@ const Dashboard = () => {
       })
   }
 
+  // const handleEdit = (workoutId: any) => {
+  //   const workoutToUpdate = workouts?.find((e) => e._id === workoutId);
+  //   axios
+  //     .put(`${baseUrl}/workouts/edit/${workoutId}`, { workout: workoutToUpdate })
+  //     .then((response) => {
+  //       const updatedWorkout = response.data.updatedWorkout;
+  //       updateWorkout?.(updatedWorkout);
+  //       const newUpdatedWorkouts = updatedWorkouts.filter(workout => workout._id !== workoutId);
+  //       setUpdatedWorkouts(newUpdatedWorkouts);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
   const handleEdit = (workoutId: any) => {
-    const workoutToUpdate = workouts?.find((e) => e._id === workoutId);
+    const workoutToUpdate = updatedWorkouts.find((e) => e._id === workoutId);
     axios
       .put(`${baseUrl}/workouts/edit/${workoutId}`, { workout: workoutToUpdate })
       .then((response) => {
@@ -41,8 +56,7 @@ const Dashboard = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
-  
+  };  
 
   return (
     <div>
@@ -72,6 +86,20 @@ const Dashboard = () => {
                 }}
               />
             ))}
+            <CardioInput 
+              type={workout.cardio.type} 
+              time={workout.cardio.time} 
+              onInputChange={(field, value) => {
+                const newWorkouts = [...updatedWorkouts];
+                if (!newWorkouts[i]) {
+                  newWorkouts[i] = { ...workout };
+                }
+                newWorkouts[i].cardio = {
+                  ...newWorkouts[i].cardio, 
+                  [field]: value
+                };
+                setUpdatedWorkouts(newWorkouts);
+              }} />
               <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
               <button className="edit-btn" onClick={()=>handleEdit(workout._id)}>Save</button>
           </div>

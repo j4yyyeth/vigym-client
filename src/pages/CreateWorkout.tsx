@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import { baseUrl } from '../services/baseUrl';
 import { useNavigate } from "react-router-dom";
-import Workouts from "./Workouts";
 
 interface Exercise {
     exercise: string;
