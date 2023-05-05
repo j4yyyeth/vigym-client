@@ -65,7 +65,7 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       .catch((err) => {
         console.log(err)
       })
-    }
+    };
 
     const updateWorkout = (updatedWorkout: Workout) => {
       const workoutIndex = workouts.findIndex((workout) => workout._id === updatedWorkout._id);

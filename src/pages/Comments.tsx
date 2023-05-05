@@ -3,6 +3,7 @@ import axios from "axios";
 import { baseUrl } from "../services/baseUrl";
 import { LoadingContext } from "../context/loadingContext";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Comment {
     _id: string;
@@ -55,6 +56,7 @@ const Comments: React.FC = () => {
 
   return (
     <div>
+      <Link to={'/workouts'}>Back</Link>
       <h2>Comments</h2>
 
       <form onSubmit={handleSubmit}>

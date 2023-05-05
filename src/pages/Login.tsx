@@ -28,7 +28,6 @@ const Login = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setthisUser((recent)=>({...recent, [e.target.name]: e.target.value}))
-        console.log("Changing user", thisUser)
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,8 +35,7 @@ const Login = () => {
 
         post('/auth/login', thisUser)
             .then((results) => {
-                console.log("Created User", results.data)
-                navigate('/')
+                navigate('/dashboard')
                 localStorage.setItem('authToken', results.data.token )
             })
             .catch((err) => {

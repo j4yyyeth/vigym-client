@@ -16,8 +16,7 @@ const Dashboard = () => {
     if (user) {
       getUserWorkouts();
     }
-  }, [user]);  
-
+  }, [user]); 
 
   const handleDelete = (workoutId: string) => {
     axios.delete(`${baseUrl}/workouts/delete/${workoutId}`)
@@ -86,7 +85,7 @@ const Dashboard = () => {
         : <></>
       }
       <h3>My Calendar</h3>
-      <Calendar workouts={workouts} user={user} />
+      <Calendar workouts={workouts} user={user}/>
     </div>
   )
 }
