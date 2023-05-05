@@ -44,6 +44,7 @@ export interface Exercise {
 export interface Workout {
   _id: string;
   exercises: Exercise[];
+  cardio: {type: string, time: number}
 }
 
 const LoadingContext = createContext<LoadingContextProps | null>(null);

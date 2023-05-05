@@ -23,6 +23,8 @@ const WorkoutCard = () => {
               <p>Weight: {exercise.weight}</p>
             </div>
           ))}
+            <h2>Cardio: {workout.cardio.type}</h2>
+            <h5>Time: {workout.cardio.time} min</h5>
             <Link to={`/comments/${workout._id}`}><b>Comment</b></Link>
           </div>
         ))
