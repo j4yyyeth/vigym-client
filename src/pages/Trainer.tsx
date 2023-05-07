@@ -2,45 +2,65 @@ import { useState } from "react";
 import { baseUrl } from "../services/baseUrl";
 
 const Trainer = () => {
-
-  const [ userMessage, setUserMessage ] = useState('');
-  const [ AIMessage, setAIMessage ] = useState('');
+  const [userMessage, setUserMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState<Array<{ type: "user" | "AI"; content: string }>>([]);
 
   const sendMessage = async () => {
-    setUserMessage('');
+    setMessages([...messages, { type: "user", content: userMessage }]);
+    setUserMessage("");
+    setIsLoading(true);
     try {
       const response = await fetch(`${baseUrl}/trainer`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ message: userMessage }),
       });
-      
+
       if (!response.ok) {
         throw new Error(`Server error: ${response.status}`);
       }
-      
+
       const responseData = await response.json();
-      setAIMessage(responseData.response);
-    }
-    catch (err) {
+      setMessages([...messages, { type: "user", content: userMessage }, { type: "AI", content: responseData.response }]);
+    } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
-  }
-  
-  
+  };
+
   return (
     <div>
       <h1>AI Trainer</h1>
-      <br></br>
-      <input type="text" value={userMessage} onChange={(e) => setUserMessage(e.target.value)}></input>
+      <br />
+      <input
+        type="text"
+        value={userMessage}
+        onChange={(e) => setUserMessage(e.target.value)}
+      ></input>
       <button onClick={sendMessage}>Send</button>
-      <br></br>
-      <br></br>
-      <h3>{AIMessage}</h3>
+      <br />
+      <br />
+      <div>
+        {messages.map((message, index) => (
+          <div key={index} className={message.type === "user" ? "user-message" : "AI-message"}>
+            <br></br>
+            <h3>{message.content}</h3>
+          </div>
+        ))}
+        {isLoading && (
+          <>
+            <br></br>
+            <h3>Loading...</h3>
+          </>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Trainer
+export default Trainer;
+

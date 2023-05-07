@@ -20,7 +20,7 @@ const WorkoutCard = () => {
               <h5>{exercise.exercise}</h5>
               <p>Sets: {exercise.sets}</p>
               <p>Reps: {exercise.reps}</p>
-              <p>Weight: {exercise.weight}</p>
+              <p>Weight: {exercise.weight} lbs</p>
             </div>
           ))}
           {

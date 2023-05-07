@@ -142,3 +142,8 @@ nav a:hover {
 /* input {
   background-color: #F7F7F7;
 } */
+
+.calendar {
+  display: flex;
+  padding: 50px;
+}

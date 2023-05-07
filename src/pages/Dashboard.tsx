@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useCallback } from "react";
+import { useState, useContext, useEffect } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import axios from "axios";
 import { baseUrl } from "../services/baseUrl";
@@ -50,7 +50,6 @@ const Dashboard = () => {
         console.log(err);
       });
   };  
-
 
   return (
     <div>

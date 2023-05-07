@@ -13,12 +13,6 @@ const Calendar = ({ workouts, user }) => {
     }
   }, [user]);
   
-  // useEffect(() => {
-  //   if (user) {
-  //     saveSchedule();
-  //   }
-  // }, [schedule]);
-  
   const fetchSchedule = async () => {
     try {
       const response = await axios.get(`${baseUrl}/workouts/schedule/${user._id}`);
@@ -53,7 +47,7 @@ const handleWorkoutChange = (dayIndex, e) => {
   };
   
   return (
-    <div>
+    <div className="calendar">
       {daysOfWeek.map((day, index) => (
         <div key={index} className="day">
           <h4>{day}</h4>
