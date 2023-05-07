@@ -24,6 +24,7 @@ const CardioInput: React.FC<CardioInputProps> = ({ type, time, onInputChange }) 
       />
       <label>Time</label>
       <input
+        type="number"
         ref={timeRef}
         defaultValue={time}
         onChange={(e) => handleInputChange("time", parseInt(e.target.value))}

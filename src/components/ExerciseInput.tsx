@@ -37,6 +37,7 @@ const ExerciseInput: React.FC<ExerciseInputProps> = ({ exercise, sets, reps, wei
       />
       <label>Sets</label>
       <input
+        type="number"
         ref={setsRef}
         defaultValue={sets}
         onChange={(e) => handleInputChange("sets", parseInt(e.target.value))}
@@ -44,6 +45,7 @@ const ExerciseInput: React.FC<ExerciseInputProps> = ({ exercise, sets, reps, wei
       />
       <label>Reps</label>
       <input
+        type="number"
         ref={repsRef}
         defaultValue={reps}
         onChange={(e) => handleInputChange("reps", parseInt(e.target.value))}
@@ -51,11 +53,12 @@ const ExerciseInput: React.FC<ExerciseInputProps> = ({ exercise, sets, reps, wei
       />
       <label>Weight</label>
       <input
+        type="number"
         ref={weightRef}
         defaultValue={weight}
         onChange={(e) => handleInputChange("weight", parseInt(e.target.value))}
         onFocus={onInputFocus}
-      />
+      /> lbs
     </div>
   );
 };

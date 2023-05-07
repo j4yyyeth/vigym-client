@@ -50,7 +50,7 @@ const Dashboard = () => {
         console.log(err);
       });
   };  
-  
+
 
   return (
     <div>
@@ -62,43 +62,53 @@ const Dashboard = () => {
             <br></br>
             {workout.exercises.map((exercise, j) => (
               <ExerciseInput
-              key={j}
-              exercise={exercise.exercise}
-              sets={exercise.sets}
-              reps={exercise.reps}
-              weight={exercise.weight}
-              onInputChange={(field, value) => {
-                const newWorkouts = [...updatedWorkouts];
-                if (!newWorkouts[i]) {
-                  newWorkouts[i] = { ...workout };
-                }
-                newWorkouts[i].exercises[j] = {
-                  ...newWorkouts[i].exercises[j],
-                  [field]: value,
-                };
-                setUpdatedWorkouts(newWorkouts);
-              }}
-              focusId={`${workout._id}-${j}`}
-              focus={isEditing[workout._id]}
-              onInputFocus={() => {
-                if (!isEditing[workout._id]) {
-                  setIsEditing({ ...isEditing, [workout._id]: true });
-                }
-              }}
-            />
+                key={j}
+                exercise={exercise.exercise}
+                sets={exercise.sets}
+                reps={exercise.reps}
+                weight={exercise.weight}
+                onInputChange={(field, value) => {
+                  const workoutIndex = updatedWorkouts.findIndex(w => w._id === workout._id);
+                  const newWorkouts = [...updatedWorkouts];
+
+                  if (workoutIndex === -1) {
+                    newWorkouts.push({ ...workout });
+                  }
+
+                  const targetWorkout = newWorkouts[workoutIndex !== -1 ? workoutIndex : newWorkouts.length - 1];
+                  targetWorkout.exercises[j] = {
+                    ...targetWorkout.exercises[j],
+                    [field]: value,
+                  };
+
+                  setUpdatedWorkouts(newWorkouts);
+                }}
+                focusId={`${workout._id}-${j}`}
+                focus={isEditing[workout._id]}
+                onInputFocus={() => {
+                  if (!isEditing[workout._id]) {
+                    setIsEditing({ ...isEditing, [workout._id]: true });
+                  }
+                }}
+              />
             ))}
-            <CardioInput 
-              type={workout.cardio.type} 
+           <CardioInput
+              type={workout.cardio.type}
               time={workout.cardio.time}
               onInputChange={(field, value) => {
+                const workoutIndex = updatedWorkouts.findIndex(w => w._id === workout._id);
                 const newWorkouts = [...updatedWorkouts];
-                if (!newWorkouts[i]) {
-                  newWorkouts[i] = { ...workout };
+
+                if (workoutIndex === -1) {
+                  newWorkouts.push({ ...workout });
                 }
-                newWorkouts[i].cardio = {
-                  ...newWorkouts[i].cardio, 
-                  [field]: value
+
+                const targetWorkout = newWorkouts[workoutIndex !== -1 ? workoutIndex : newWorkouts.length - 1];
+                targetWorkout.cardio = {
+                  ...targetWorkout.cardio,
+                  [field]: value,
                 };
+
                 setUpdatedWorkouts(newWorkouts);
               }}
             />
