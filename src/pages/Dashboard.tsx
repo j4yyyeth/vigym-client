@@ -28,21 +28,6 @@ const Dashboard = () => {
       })
   }
 
-  // const handleEdit = (workoutId: any) => {
-  //   const workoutToUpdate = workouts?.find((e) => e._id === workoutId);
-  //   axios
-  //     .put(`${baseUrl}/workouts/edit/${workoutId}`, { workout: workoutToUpdate })
-  //     .then((response) => {
-  //       const updatedWorkout = response.data.updatedWorkout;
-  //       updateWorkout?.(updatedWorkout);
-  //       const newUpdatedWorkouts = updatedWorkouts.filter(workout => workout._id !== workoutId);
-  //       setUpdatedWorkouts(newUpdatedWorkouts);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   const handleEdit = (workoutId: any) => {
     const workoutToUpdate = updatedWorkouts.find((e) => e._id === workoutId);
     axios
