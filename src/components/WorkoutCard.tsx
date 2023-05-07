@@ -24,7 +24,7 @@ const WorkoutCard = () => {
             </div>
           ))}
           {
-            workout.cardio?
+            workout.cardio.type.length?
             <>
               <h2>Cardio: {workout.cardio.type}</h2>
               <h5>Time: {workout.cardio.time} min</h5>

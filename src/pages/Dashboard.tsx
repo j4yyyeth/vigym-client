@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 import { LoadingContext } from "../context/loadingContext";
 import axios from "axios";
 import { baseUrl } from "../services/baseUrl";
@@ -62,24 +62,30 @@ const Dashboard = () => {
             <br></br>
             {workout.exercises.map((exercise, j) => (
               <ExerciseInput
-                key={j}
-                exercise={exercise.exercise}
-                sets={exercise.sets}
-                reps={exercise.reps}
-                weight={exercise.weight}
-                onInputChange={(field, value) => {
-                  const newWorkouts = [...updatedWorkouts];
-                  if (!newWorkouts[i]) {
-                    newWorkouts[i] = { ...workout };
-                  }
-                  newWorkouts[i].exercises[j] = {
-                    ...newWorkouts[i].exercises[j],
-                    [field]: value,
-                  };
-                  setUpdatedWorkouts(newWorkouts);
-                }}
-                focus={isEditing[workout._id]}
-              />
+              key={j}
+              exercise={exercise.exercise}
+              sets={exercise.sets}
+              reps={exercise.reps}
+              weight={exercise.weight}
+              onInputChange={(field, value) => {
+                const newWorkouts = [...updatedWorkouts];
+                if (!newWorkouts[i]) {
+                  newWorkouts[i] = { ...workout };
+                }
+                newWorkouts[i].exercises[j] = {
+                  ...newWorkouts[i].exercises[j],
+                  [field]: value,
+                };
+                setUpdatedWorkouts(newWorkouts);
+              }}
+              focusId={`${workout._id}-${j}`}
+              focus={isEditing[workout._id]}
+              onInputFocus={() => {
+                if (!isEditing[workout._id]) {
+                  setIsEditing({ ...isEditing, [workout._id]: true });
+                }
+              }}
+            />
             ))}
             <CardioInput 
               type={workout.cardio.type} 
