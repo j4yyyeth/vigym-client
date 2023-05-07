@@ -11,12 +11,20 @@ const Dashboard = () => {
 
   const { user, workouts, getUserWorkouts, updateWorkout } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
   const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
+  const [isEditing, setIsEditing] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (user) {
       getUserWorkouts();
     }
-  }, [user]); 
+  }, [user]);
+
+  const handleEditToggle = (workoutId: string) => {
+    if (isEditing[workoutId]) {
+      handleEdit(workoutId);
+    }
+    setIsEditing({ ...isEditing, [workoutId]: !isEditing[workoutId] });
+  };
 
   const handleDelete = (workoutId: string) => {
     axios.delete(`${baseUrl}/workouts/delete/${workoutId}`)
@@ -42,6 +50,7 @@ const Dashboard = () => {
         console.log(err);
       });
   };  
+  
 
   return (
     <div>
@@ -69,11 +78,12 @@ const Dashboard = () => {
                   };
                   setUpdatedWorkouts(newWorkouts);
                 }}
+                focus={isEditing[workout._id]}
               />
             ))}
             <CardioInput 
               type={workout.cardio.type} 
-              time={workout.cardio.time} 
+              time={workout.cardio.time}
               onInputChange={(field, value) => {
                 const newWorkouts = [...updatedWorkouts];
                 if (!newWorkouts[i]) {
@@ -84,9 +94,10 @@ const Dashboard = () => {
                   [field]: value
                 };
                 setUpdatedWorkouts(newWorkouts);
-              }} />
+              }}
+            />
               <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
-              <button className="edit-btn" onClick={()=>handleEdit(workout._id)}>Save</button>
+              <button className="edit-btn" onClick={() => handleEditToggle(workout._id)}>{isEditing[workout._id] ? "Save" : "Edit"}</button>
           </div>
         ))
       }

@@ -14,7 +14,7 @@ const BarChart = () => {
     if (workouts && workouts.length > 0) {
       setColors(generateColors(workouts));
     }
-  }, [workouts]);
+  }, []);
 
   const handleWorkoutChange = (e) => {
     setSelectedWorkoutIndex(Number(e.target.value));

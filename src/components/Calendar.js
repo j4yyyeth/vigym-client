@@ -9,21 +9,22 @@ const Calendar = ({ workouts, user }) => {
   useEffect(() => {
     if (user) {
       fetchSchedule();
+      saveSchedule();
     }
   }, [user]);
   
-  useEffect(() => {
-    if (user && schedule) {
-      saveSchedule();
-    }
-  }, [schedule]);
+  // useEffect(() => {
+  //   if (user) {
+  //     saveSchedule();
+  //   }
+  // }, [schedule]);
   
   const fetchSchedule = async () => {
     try {
       const response = await axios.get(`${baseUrl}/workouts/schedule/${user._id}`);
       const fetchedSchedule = new Array(7).fill(null);
       response.data.forEach(item => {
-        fetchedSchedule[item.dayIndex] = item.workout._id;
+        fetchedSchedule[item.dayIndex] = item?.workout?._id;
       });
       setSchedule(fetchedSchedule);
     } catch (error) {
@@ -50,7 +51,6 @@ const handleWorkoutChange = (dayIndex, e) => {
       console.error(error);
     }
   };
-  
   
   return (
     <div>

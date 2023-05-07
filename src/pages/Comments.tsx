@@ -57,7 +57,6 @@ const Comments: React.FC = () => {
     <div>
       <Link to={'/workouts'}>Back</Link>
       <h2>Comments</h2>
-
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="comment">Leave a comment:</label>
@@ -69,9 +68,7 @@ const Comments: React.FC = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-
       <br></br>
-
       <div>
         <h3>All Comments</h3>
         <br></br>
