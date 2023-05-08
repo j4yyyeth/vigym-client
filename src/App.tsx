@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, Outlet, Navigate } from 'react-router-dom';
+import { Route, Routes, Outlet, Navigate,Location, useLocation } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import MusicPlayer from './components/MusicPlayer';
@@ -27,10 +27,17 @@ function App() {
   const LoggedOut = () => {
     return !getToken() ? <Outlet /> : <Navigate to="/" />;
   }
+
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === '/login';
+  const isSignupPage = location.pathname === '/signup';
+
+  const showNavbar = !isLoginPage && !isSignupPage;
   
   return (
     <div className="App">
-      <Navbar />
+      { showNavbar && <Navbar /> }
       <Routes>
 
         <Route path='/' element={<Home />} />
