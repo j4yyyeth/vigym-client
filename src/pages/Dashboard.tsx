@@ -9,15 +9,17 @@ import Calendar from "../components/Calendar";
 
 const Dashboard = () => {
 
-  const { user, workouts, getUserWorkouts, updateWorkout } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { user, workouts, getUserWorkouts, updateWorkout, getUserSchedule } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
   const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
   const [isEditing, setIsEditing] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (user) {
       getUserWorkouts();
+      getUserSchedule?.();
     }
   }, [user]);
+  
 
   const handleEditToggle = (workoutId: string) => {
     if (isEditing[workoutId]) {
@@ -124,7 +126,7 @@ const Dashboard = () => {
         : <></>
       }
       <h3>My Calendar</h3>
-      <Calendar workouts={workouts} user={user}/>
+      <Calendar workouts={workouts} user={user} userSchedule={getUserSchedule} />
     </div>
   )
 }

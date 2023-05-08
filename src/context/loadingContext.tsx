@@ -23,6 +23,9 @@ export interface LoadingContextProps {
   setWorkouts: React.Dispatch<React.SetStateAction<Workout[]>>;
   getUserWorkouts: () => void;
   updateWorkout: (updatedWorkout: Workout) => void;
+  userSchedule: Array<{ dayIndex: number, workout: string | null }>;
+  setUserSchedule: React.Dispatch<React.SetStateAction<Array<{ dayIndex: number, workout: string | null }>>>;
+  getUserSchedule: () => void;
 }
 
 export interface Exercises {
@@ -57,6 +60,7 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
     const [ exerciseLibrary, setExerciseLibrary ] = useState<Array<Exercises>>([]);
     const [ allWorkouts, setAllWorkouts ] = useState<Workout[]>([]);
     const [ workouts, setWorkouts ] = useState<Workout[]>([]);
+    const [userSchedule, setUserSchedule] = useState<any[]>([]);
 
     const getExercisesLibrary = () => {
       get('/exercises')
@@ -100,8 +104,21 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       })
     }
 
+    const getUserSchedule = () => {
+      if (!user) {
+        return;
+      }
+      get(`/workouts/schedule/${user._id}`)
+        .then((results) => {
+          setUserSchedule(results.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };    
+
     return (
-      <LoadingContext.Provider value={{render, setRender, user, setUser, isLoading, setIsLoading, exerciseLibrary, setExerciseLibrary, getExercisesLibrary, allWorkouts, setAllWorkouts, getAllWorkouts, workouts, setWorkouts, getUserWorkouts, updateWorkout}}>
+      <LoadingContext.Provider value={{render, setRender, user, setUser, isLoading, setIsLoading, exerciseLibrary, setExerciseLibrary, getExercisesLibrary, allWorkouts, setAllWorkouts, getAllWorkouts, workouts, setWorkouts, getUserWorkouts, updateWorkout, userSchedule, setUserSchedule, getUserSchedule}}>
         {children}
       </LoadingContext.Provider>
     );

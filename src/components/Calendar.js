@@ -2,14 +2,24 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../services/baseUrl";
 
-const Calendar = ({ workouts, user }) => {
+const Calendar = ({ workouts, user, userSchedule }) => {
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const [schedule, setSchedule] = useState(new Array(7).fill(null));
+  
+  const initializeSchedule = () => {
+    const initialSchedule = new Array(7).fill(null);
+    if (Array.isArray(userSchedule)) {
+      userSchedule.forEach(item => {
+        initialSchedule[item.dayIndex] = item?.workout?._id;
+      });
+    }
+    return initialSchedule;
+  };  
+  
+  const [schedule, setSchedule] = useState(initializeSchedule);
 
   useEffect(() => {
     if (user) {
       fetchSchedule();
-      saveSchedule();
     }
   }, [user]);
   
@@ -21,28 +31,29 @@ const Calendar = ({ workouts, user }) => {
         fetchedSchedule[item.dayIndex] = item?.workout?._id;
       });
       setSchedule(fetchedSchedule);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-const handleWorkoutChange = (dayIndex, e) => {
-  const newSchedule = [...schedule];
-  newSchedule[dayIndex] = e.target.value;
-  setSchedule(newSchedule);
-};
+  const handleWorkoutChange = (dayIndex, e) => {
+    const newSchedule = [...schedule];
+    newSchedule[dayIndex] = e.target.value;
+    setSchedule(newSchedule);
+    saveSchedule(newSchedule);
+  };
   
-  const saveSchedule = async () => {
+  const saveSchedule = async (updatedSchedule) => {
     try {
-      const formattedSchedule = schedule.map((workoutId, dayIndex) => ({
+      const formattedSchedule = updatedSchedule.map((workoutId, dayIndex) => ({
         dayIndex,
         workout: workoutId,
       }));
       await axios.put(`${baseUrl}/workouts/schedule/${user._id}`, {
         schedule: formattedSchedule,
       });
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.log(err);
     }
   };
   
