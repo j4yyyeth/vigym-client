@@ -34,7 +34,7 @@ const Dashboard = () => {
         getUserWorkouts();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err, "error!");
       })
   }
 
@@ -49,19 +49,22 @@ const Dashboard = () => {
         setUpdatedWorkouts(newUpdatedWorkouts);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err, "EDIT ERROR!");
       });
   };  
 
   return (
-    <div>
-      <h3>My Dashboard</h3>
-      {
-        workouts?.map((workout, i) => (
-          <div className="all-workouts" key={i}>
-            <h4>Workout {i + 1}</h4>
-            <br></br>
-            {workout.exercises.map((exercise, j) => (
+    <div className="bg-gray-100 min-h-screen pt-16">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {workouts?.map((workout, i) => (
+            <div
+              className="bg-white shadow-md rounded-lg p-4"
+              key={i}
+            >
+              <h4 className="text-xl font-bold mb-2">Workout {i + 1}</h4>
+              <hr className="mb-4" />
+              {workout.exercises.map((exercise, j) => (
               <ExerciseInput
                 key={j}
                 exercise={exercise.exercise}
@@ -113,22 +116,37 @@ const Dashboard = () => {
                 setUpdatedWorkouts(newWorkouts);
               }}
             />
-              <button className="dlt-btn" onClick={()=>handleDelete(workout._id)}>Delete</button>
-              <button className="edit-btn" onClick={() => handleEditToggle(workout._id)}>{isEditing[workout._id] ? "Save" : "Edit"}</button>
+              <div className="mt-4 flex justify-end">
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded mr-2"
+                  onClick={() => handleDelete(workout._id)}
+                >
+                  Delete
+                </button>
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                  onClick={() => handleEditToggle(workout._id)}
+                >
+                  {isEditing[workout._id] ? "Save" : "Edit"}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        {workouts && workouts.length > 0 ? (
+          <div className="mt-8 flex justify-center">
+            <BarChart />
           </div>
-        ))
-      }
-      {
-        workouts && workouts.length > 0 ? 
-        <div style={{ width: '52%', height: '52%' }}>
-          <BarChart />
-        </div> 
-        : <></>
-      }
-      <h3>My Calendar</h3>
-      <Calendar workouts={workouts} user={user} userSchedule={getUserSchedule} />
+        ) : (
+          <></>
+        )}
+        <h3 className="text-2xl font-bold my-8 text-center">Schedule</h3>
+        <div className="flex justify-center">
+          <Calendar workouts={workouts} user={user} userSchedule={getUserSchedule} />
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

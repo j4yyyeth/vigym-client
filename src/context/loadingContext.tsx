@@ -65,10 +65,10 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
     const getExercisesLibrary = () => {
       get('/exercises')
       .then((results) => {
-        setExerciseLibrary(results.data)
+        setExerciseLibrary(results.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       })
     };
 
@@ -98,6 +98,7 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       get(`/workouts/user/${user._id}`)
       .then((results) => {
         setWorkouts(results.data)
+        console.log('Updated Workouts:', results.data);
       })
       .catch((err) => {
         console.log(err)
@@ -124,4 +125,4 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
     );
 }
 
-export { LoadingContext, LoadingProvider }
+export { LoadingContext, LoadingProvider };

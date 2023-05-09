@@ -1,6 +1,6 @@
 import { useEffect, createContext, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { get } from "../services/authService"
+import { get } from "../services/authService";
 import { LoadingContext } from "./loadingContext";
 
 interface AuthContextProps {
@@ -16,7 +16,7 @@ export interface User {
     email: string;
     username: string;
     password: string;
-    _id: string
+    _id: string;
 }
 
 interface LoadingContextProps {
@@ -31,37 +31,31 @@ const AuthContext = createContext<AuthContextProps | null>(null);
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const { render, setIsLoading, user, setUser } = useContext(LoadingContext) as LoadingContextProps;
-
     const navigate = useNavigate();
 
     const authenticateUser = () => {
 
         const token = localStorage.getItem("authToken");
-        
         setIsLoading(true);
      
         if (token) {
             get("/auth/verify")
                 .then((results) => {
-                    console.log("Are we logged in?", results.data);
                     setUser(results.data)
-
                 })
                 .catch((err) => {
                     localStorage.clear();
-                    setIsLoading(false)
+                    setIsLoading(false);
                     console.log(err.message);
                 })
                 .finally(() => {
-                    setIsLoading(false)
+                    setIsLoading(false);
                 });
             } else {
-                localStorage.clear()
+                localStorage.clear();
                 setIsLoading(false);
                 setUser(null);
             }
-
-            console.log("This is the user", user)
     }
 
     const logout = () => {
@@ -79,9 +73,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ authenticateUser, logout }}>
-          {children}
+            {children}
         </AuthContext.Provider>
-      );
-}
+    );
+};
 
-export { AuthContext, AuthProvider }
+export { AuthContext, AuthProvider };

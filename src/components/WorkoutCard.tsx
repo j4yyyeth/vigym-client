@@ -3,40 +3,45 @@ import { LoadingContext } from "../context/loadingContext";
 import { Link } from "react-router-dom";
 
 const WorkoutCard = () => {
+  const { allWorkouts, getAllWorkouts } =
+    useContext(LoadingContext) || { getAllWorkouts: () => {} };
 
-    const { allWorkouts, getAllWorkouts } = useContext(LoadingContext) || { getAllWorkouts: () => {} };
-
-    useEffect(() => {
-        getAllWorkouts();
-    }, []);  
+  useEffect(() => {
+    getAllWorkouts();
+  }, []);
 
   return (
     <>
-        {
-        allWorkouts?.map((workout, i) => (
-          <div className="all-workouts" key={i}>
-            {workout.exercises.map((exercise, j) => (
-            <div key={j}>
-              <h5>{exercise.exercise}</h5>
+      {allWorkouts?.map((workout, i) => (
+        <div
+          className="all-workouts bg-white rounded-lg shadow-md p-4 mb-4"
+          key={i}
+        >
+          {workout.exercises.map((exercise, j) => (
+            <div key={j} className="mb-2">
+              <h5 className="font-bold">{exercise.exercise}</h5>
               <p>Sets: {exercise.sets}</p>
               <p>Reps: {exercise.reps}</p>
-              <p>Weight: {exercise.weight} lbs</p>
             </div>
           ))}
-          {
-            workout.cardio.type.length?
+          {workout.cardio.type.length ? (
             <>
-              <h2>Cardio: {workout.cardio.type}</h2>
+              <h2 className="font-bold">Cardio: {workout.cardio.type}</h2>
               <h5>Time: {workout.cardio.time} min</h5>
             </>
-            : <></>
-          }
-            <Link to={`/comments/${workout._id}`}><b>Comment</b></Link>
-          </div>
-        ))
-        }
+          ) : (
+            <></>
+          )}
+          <Link
+            to={`/comments/${workout._id}`}
+            className="text-blue-500 font-bold hover:text-blue-700"
+          >
+            Comment
+          </Link>
+        </div>
+      ))}
     </>
-  )
-}
+  );
+};
 
-export default WorkoutCard
+export default WorkoutCard;

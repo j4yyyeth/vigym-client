@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { baseUrl } from "../services/baseUrl";
 
 const Trainer = () => {
@@ -32,31 +32,51 @@ const Trainer = () => {
     }
   };
 
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   return (
-    <div>
-      <h1>AI Trainer</h1>
-      <br />
-      <input
-        type="text"
-        value={userMessage}
-        onChange={(e) => setUserMessage(e.target.value)}
-      ></input>
-      <button onClick={sendMessage}>Send</button>
-      <br />
-      <br />
-      <div>
-        {messages.map((message, index) => (
-          <div key={index} className={message.type === "user" ? "user-message" : "AI-message"}>
-            <br></br>
-            <h3>{message.content}</h3>
-          </div>
-        ))}
-        {isLoading && (
-          <>
-            <br></br>
-            <h3>Loading...</h3>
-          </>
-        )}
+    <div className="bg-gray-100 min-h-screen">
+      <div className="container mx-auto px-4 flex flex-col h-full">
+        <div className="mb-16">
+          <br></br>
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`bg-white shadow-md rounded-lg p-4 mb-4 ${
+                message.type === "user" ? "text-custom-light-blue" : "text-custom-ai-blue"
+              }`}
+            >
+              <h3 className="message-from-AI">{message.content}</h3>
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+          {isLoading && (
+            <div className="flex justify-center">
+            <div id="loading"></div>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center fixed bottom-0 left-0 w-full px-4 bg-gray-100 pb-4">
+          <input
+            type="text"
+            value={userMessage}
+            onChange={(e) => setUserMessage(e.target.value)}
+            placeholder="Type a message ..."
+            className="w-full border rounded-lg p-2 mr-4"
+          />
+          <button
+            onClick={sendMessage}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            →
+          </button>
+        </div>
       </div>
     </div>
   );

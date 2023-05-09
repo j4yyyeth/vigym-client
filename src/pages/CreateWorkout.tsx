@@ -19,6 +19,7 @@ const CreateWorkouts = () => {
     const [exercises, setExercises] = useState<Exercise[]>([]);
     const [tempExercise, setTempExercise] = useState<Exercise>({ exercise: '', sets: 0, reps: 0, weight: 0 });
     const [cardio, setCardio] = useState({ type: "", time: 0 });
+    const [hasExercises, setHasExercises] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.type === 'number' ? parseInt(e.target.value, 10) : e.target.value;
@@ -26,17 +27,18 @@ const CreateWorkouts = () => {
     };    
 
     const addExercise = () => {
-        setExercises([...exercises, tempExercise]);
-        setTempExercise({ exercise: '', sets: 0, reps: 0, weight: 0 });
-    };
+      if (tempExercise.exercise.trim() !== '') {
+          setExercises([...exercises, tempExercise]);
+          setTempExercise({ exercise: '', sets: 0, reps: 0, weight: 0 });
+          setHasExercises(true);
+      }
+  };    
 
     const submitWorkout = async () => {
-        if (!user) {
-          console.log("User not available");
+        if (!user || !hasExercises) {
+          console.log("Unable to submit");
           return;
         }
-        const url = `${baseUrl}/workouts/create/${user._id}`;
-        console.log("Submitting workout to URL:", url);
         try {
           const response = await fetch(`${baseUrl}/workouts/create/${user._id}`, {
             method: "POST",
@@ -51,95 +53,140 @@ const CreateWorkouts = () => {
           } else {
             console.log("Error submitting workout");
           }
-        } catch (error) {
-          console.log("Error:", error);
+        } catch (err) {
+          console.log(err);
         }
-      };      
+      };
+
+      const submitDisabled = exercises.length === 0;
     
     return (
-            <div>
-                <h1>Create Workouts</h1>
-                <div>
-                    <input
-                    type="text"
-                    name="exercise"
-                    value={tempExercise.exercise}
-                    onChange={handleChange}
-                    placeholder="Exercise"
-                />
-                <label>Sets</label>
-                <input
-                    type="number"
-                    name="sets"
-                    value={tempExercise.sets}
-                    onChange={handleChange}
-                    placeholder="Sets"
-                />
-                <label>Reps</label>
-                <input
-                    type="number"
-                    name="reps"
-                    value={tempExercise.reps}
-                    onChange={handleChange}
-                    placeholder="Reps"
-                />
-                <label>Weight</label>
-                <input
-                    type="number"
-                    name="weight"
-                    value={tempExercise.weight}
-                    onChange={handleChange}
-                    placeholder="Weight"
-                />
-                <button onClick={addExercise}>Add Exercise</button>
-                <div>
-                    <label>Cardio</label>
-                    <input
-                        type="text"
-                        name="type"
-                        value={cardio.type}
-                        onChange={(e) =>
-                        setCardio({ ...cardio, [e.target.name]: e.target.value })
-                        }
-                        placeholder="Cardio Type"
-                    />
-                    <label>Cardio Time (minutes)</label>
-                    <input
-                        type="number"
-                        name="time"
-                        value={cardio.time}
-                        onChange={(e) =>
-                        setCardio({ ...cardio, [e.target.name]: parseInt(e.target.value, 10) })
-                        }
-                        placeholder="Cardio Time"
-                    />
-                </div>
-            </div>
-            <div>
-                {
-                exercises.map((exercise, index) => (
-                    <div key={index}>
-                        <h3>{exercise.exercise}</h3>
-                        <p>Sets: {exercise.sets}</p>
-                        <p>Reps: {exercise.reps}</p>
-                        <p>Weight: {exercise.weight}</p>
-                        <br></br>
-                        <br></br>
-                    </div>
-                ))
-                }
-                {
-                    cardio.type ? <h3>Cardio: {cardio.type}</h3> : <h3>Cardio: None</h3>
-                }
-                {
-                    cardio.time ? <h5>{cardio.time} min</h5> : <></>
-                }
-            </div>
-            <br></br>
-            <br></br>
-            <button onClick={submitWorkout}>Submit Workout</button>
+
+        <div className="bg-gray-100 min-h-screen pt-16">
+            <div className="container mx-auto px-4">
+                <div className="bg-white shadow-md rounded-lg p-4">
+                <div className="mb-4">
+          <label className="text-blue-500">Exercise</label>
+          <input
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            type="text"
+            name="exercise"
+            value={tempExercise.exercise}
+            onChange={handleChange}
+            placeholder="Exercise"
+            required
+          />
         </div>
-    );        
-  }
+        <div className="grid grid-cols-3 gap-4 mb-4">
+          <div>
+            <label>Sets</label>
+            <input
+              className="border border-gray-300 rounded px-3 py-2 w-full"
+              type="number"
+              name="sets"
+              value={tempExercise.sets}
+              onChange={handleChange}
+              placeholder="Sets"
+            />
+          </div>
+          <div>
+            <label>Reps</label>
+            <input
+              className="border border-gray-300 rounded px-3 py-2 w-full"
+              type="number"
+              name="reps"
+              value={tempExercise.reps}
+              onChange={handleChange}
+              placeholder="Reps"
+            />
+          </div>
+          <div>
+            <label>Weight (lbs)</label>
+            <input
+              className="border border-gray-300 rounded px-3 py-2 w-full"
+              type="number"
+              name="weight"
+              value={tempExercise.weight}
+              onChange={handleChange}
+              placeholder="Weight"
+            />
+          </div>
+        </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4"
+          onClick={addExercise}
+        >
+          Add Exercise
+        </button>
+        <div className="mb-4">
+          <label className="text-blue-500">Cardio</label>
+          <input
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            type="text"
+            name="type"
+            value={cardio.type}
+            onChange={(e) =>
+              setCardio({ ...cardio, [e.target.name]: e.target.value })
+            }
+            placeholder="Cardio"
+          />
+        </div>
+        <div className="mb-4">
+          <label>Time (minutes)</label>
+          <input
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            type="number"
+            name="time"
+            value={cardio.time}
+            onChange={(e) =>
+              setCardio({
+                ...cardio,
+                [e.target.name]: parseInt(e.target.value, 10),
+              })
+            }
+            placeholder="Cardio Time"
+          />
+        </div>
+      </div>
+      <div className="mt-8">
+        {exercises.map((exercise, index) => (
+          <div
+            className="bg-white shadow-md rounded-lg p-4 mb-4"
+            key={index}
+          >
+            <h3 className="text-xl font-bold mb-2">{exercise.exercise}</h3>
+            <p>Sets: {exercise.sets}</p>
+            <p>Reps: {exercise.reps}</p>
+            <p>Weight: {exercise.weight}</p>
+          </div>
+        ))}
+        {cardio.type ? (
+          <h3 className="text-xl font-bold">Cardio: {cardio.type}</h3>
+        ) : (
+          <h3 className="text-xl font-bold">Cardio: None</h3>
+        )}
+        {cardio.time ? (
+          <h5 className="text-lg font-semibold">{cardio.time} min</h5>
+        ) : (
+          <></>
+        )}
+        <br></br>
+        <h3 className="text-xl font-bold">{exercises.length} Exercises</h3>
+      </div>
+      <br></br>
+      <br></br>
+      {
+        exercises.length ? <button
+        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+        onClick={submitWorkout}
+        disabled={submitDisabled}
+      >
+        Submit Workout
+      </button> : <></>
+      }
+    </div>
+  </div>
+);
+        }
   
   export default CreateWorkouts;

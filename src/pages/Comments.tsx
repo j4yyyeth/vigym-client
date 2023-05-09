@@ -54,29 +54,46 @@ const Comments: React.FC = () => {
   };  
   
   return (
-    <div>
-      <Link to={'/workouts'}>Back</Link>
-      <h2>Comments</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="comment">Leave a comment:</label>
-          <textarea
-            id="comment"
-            value={newComment}
-            onChange={handleCommentChange}
-          ></textarea>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-      <br></br>
-      <div>
-        <h3>All Comments</h3>
-        <br></br>
-        {comments.map((comment) => (
-          <div key={comment._id}>
-            <p><strong>{comment.author.username}:</strong> {comment.content}</p>
+    <div className="bg-gray-100 min-h-screen pt-16">
+      <div className="container mx-auto px-4">
+        <Link to="/workouts" className="text-blue-500 hover:text-blue-600">
+          Back
+        </Link>
+        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-4">
+          <div>
+            <label htmlFor="comment" className="block mb-2">
+              Leave a comment:
+            </label>
+            <textarea
+              id="comment"
+              value={newComment}
+              onChange={handleCommentChange}
+              className="w-full h-32 border rounded-lg p-2"
+            ></textarea>
           </div>
-        ))}
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mt-4 rounded"
+          >
+            Submit
+          </button>
+        </form>
+        <br></br>
+        <div>
+          <h3 className="text-xl font-bold mb-2">All Comments</h3>
+          <br></br>
+          {comments.map((comment) => (
+            <div
+              key={comment._id}
+              className="bg-white shadow-md rounded-lg p-4 mb-4"
+            >
+              <p>
+                <strong className="font-bold">{comment.author.username}:</strong>{" "}
+                {comment.content}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

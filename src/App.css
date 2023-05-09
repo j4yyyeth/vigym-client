@@ -46,10 +46,41 @@ nav {
   color: #0075C9;
 }
 
-nav a:hover {
-  color: #008DF2;
-  transition: .3s;
+nav a {
+  position: relative;
 }
+
+nav a::before, nav a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #fc2f70;
+  transform: scaleY(0);
+  transition: transform 0.5s ease;
+}
+
+nav a::before {
+  left: -8px;
+  transform-origin: center top;
+}
+
+nav a:hover::before {
+  transform-origin: center bottom;
+  transform: scaleY(1);
+}
+
+nav a::after {
+  right: -8px;
+  transform-origin: center bottom;
+}
+
+nav a:hover::after {
+  transform-origin: center top;
+  transform: scaleY(1);
+}
+
 
 #logo-img {
   width: 7rem;
@@ -62,10 +93,6 @@ nav a:hover {
   -ms-user-select:none;
   user-select:none
 }
-
-/* #user-img:hover {
-  filter: invert(34%) sepia(97%) saturate(3815%) hue-rotate(195deg);
-} */
 
 .logo-txt {
   display: flex;
@@ -146,4 +173,45 @@ nav a:hover {
 .calendar {
   display: flex;
   padding: 50px;
+}
+
+#loading {
+  display: flex;
+  width: 3.5em;
+  height: 3.5em;
+  border: 3px solid transparent;
+  border-top-color: #58b9ff;
+  border-bottom-color: #58b9ff;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+#loading:before {
+  content: '';
+  display: block;
+  margin: auto;
+  width: 0.75em;
+  height: 0.75em;
+  border: 3px solid #58b9ff;
+  border-radius: 50%;
+  animation: pulse 1s alternate ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.message-from-AI {
+  line-height: 2.5rem;
 }

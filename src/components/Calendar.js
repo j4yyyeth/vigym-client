@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { baseUrl } from "../services/baseUrl";
+import axios from "axios";
 
 const Calendar = ({ workouts, user, userSchedule }) => {
+  
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   
   const initializeSchedule = () => {
@@ -65,9 +66,7 @@ const Calendar = ({ workouts, user, userSchedule }) => {
           <select value={schedule[index] || ""} onChange={(e) => handleWorkoutChange(index, e)}>
             <option value="">Select Workout</option>
             {workouts.map((workout, i) => (
-              <option key={i} value={workout._id}>
-                Workout {i + 1}
-              </option>
+              <option key={i} value={workout._id}>Workout {i + 1}</option>
             ))}
           </select>
         </div>
