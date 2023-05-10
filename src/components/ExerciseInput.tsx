@@ -29,7 +29,7 @@ const ExerciseInput: React.FC<ExerciseInputProps> = ({ exercise, sets, reps, wei
   };
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 mb-4">
+    <div className="border border-blue-400 rounded-lg p-4 mb-4">
       <div className="grid grid-cols-4 gap-4">
         <div className="col-span-1">
           <label className="block font-medium text-gray-700 mb-2">Exercise</label>

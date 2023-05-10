@@ -46,20 +46,29 @@ const Comments: React.FC = () => {
         content: newComment,
       });
   
-      setComments([...comments, response.data]);
+      const newCommentData = {
+        ...response.data,
+        author: {
+          _id: user?._id,
+          username: user?.username,
+        },
+      };
+  
+      setComments([...comments, newCommentData]);
       setNewComment("");
     } catch (err) {
       console.error(err);
     }
-  };  
+  };
+  
   
   return (
     <div className="bg-gray-100 min-h-screen pt-16">
       <div className="container mx-auto px-4">
-        <Link to="/workouts" className="text-blue-500 hover:text-blue-600">
+        <Link to="/workouts" className="text-blue-500 hover:text-blue-600 mb-4">
           Back
         </Link>
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-4">
+        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-4 mt-4">
           <div>
             <label htmlFor="comment" className="block mb-2">
               Leave a comment:
@@ -80,15 +89,14 @@ const Comments: React.FC = () => {
         </form>
         <br></br>
         <div>
-          <h3 className="text-xl font-bold mb-2">All Comments</h3>
-          <br></br>
+          <h3 className="text-xl font-bold mb-2">All Comments:</h3>
           {comments.map((comment) => (
             <div
               key={comment._id}
               className="bg-white shadow-md rounded-lg p-4 mb-4"
             >
               <p>
-                <strong className="font-bold">{comment.author.username}:</strong>{" "}
+                <strong className="font-bold text-blue-600">{comment.author.username}:</strong>{" "}
                 {comment.content}
               </p>
             </div>

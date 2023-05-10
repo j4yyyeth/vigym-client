@@ -46,6 +46,7 @@ export interface Exercise {
 
 export interface Workout {
   _id: string;
+  user: {username: string};
   exercises: Exercise[];
   cardio: {type: string, time: number}
 }
@@ -85,6 +86,7 @@ const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
       get('/workouts/all')
       .then((results) => {
         setAllWorkouts(results.data);
+        console.log(results.data, "RESULTS!!!")
       })
       .catch((err) => {
         console.log(err);

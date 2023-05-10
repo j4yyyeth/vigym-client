@@ -10,6 +10,7 @@ const Navbar = () => {
   const { logout } = useContext(AuthContext) ?? {};
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [ color, setColor ] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -31,8 +32,19 @@ const Navbar = () => {
     };
   }, []);
 
+  const changeColor = () => {
+    if (window.scrollY >= 40) {
+        setColor(true);
+    }
+    else {
+        setColor(false);
+    }
+}
+
+window.addEventListener('scroll', changeColor)
+
   return (
-    <nav>
+    <nav className={color ? 'nav-color' : 'no-color'}>
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <div className='logo-txt'>
@@ -45,7 +57,7 @@ const Navbar = () => {
           <div className="relative" ref={dropdownRef}>
       <span className="cursor-pointer" onClick={toggleDropdown}>Workouts</span>
       {dropdownVisible && (
-        <div className="absolute left-0 mt-2 space-y-2 bg-white text-blue-500 rounded shadow-md z-10">
+        <div className="absolute text-center mt-2 space-y-2 bg-white text-blue-500 rounded shadow-md z-10">
           <Link to="/workouts" className="block px-4 py-2 hover:bg-blue-500 hover:text-white" onClick={() => setDropdownVisible(false)}>View</Link>
           <Link to="/create-workout" className="block px-4 py-2 hover:bg-blue-500 hover:text-white" onClick={() => setDropdownVisible(false)}>Create</Link>
         </div>
