@@ -41,7 +41,7 @@ const Trainer = () => {
   }, [messages]);
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-300 min-h-screen">
       <div className="container mx-auto px-4 flex flex-col h-full">
         <div className="mb-16">
           <br></br>

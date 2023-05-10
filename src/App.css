@@ -10,10 +10,15 @@
   padding: 0
 }
 
+html {
+  overflow: overlay;
+}
+
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #3f8fff;
+  background-color: #065cd4;
   font-family: 'Montserrat', sans-serif;
   /* background-image: url('./gym3.jpg');
   background-size: cover;
