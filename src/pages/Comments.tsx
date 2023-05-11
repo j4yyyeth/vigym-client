@@ -63,9 +63,9 @@ const Comments: React.FC = () => {
   
   
   return (
-    <div className="bg-gray-100 min-h-screen pt-16">
+    <div className="min-h-screen pt-16">
       <div className="container mx-auto px-4">
-        <Link to="/workouts" className="text-blue-500 hover:text-blue-600 mb-4">
+        <Link to="/workouts" className="bg-white shadow-md rounded-md p-4 text-blue-500 px-4 py-2 text-center">
           Back
         </Link>
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-4 mt-4">
@@ -89,7 +89,7 @@ const Comments: React.FC = () => {
         </form>
         <br></br>
         <div>
-          <h3 className="text-xl font-bold mb-2">All Comments:</h3>
+          <h3 className="text-xl font-bold mb-2 text-gray-100">All Comments:</h3>
           {comments.map((comment) => (
             <div
               key={comment._id}

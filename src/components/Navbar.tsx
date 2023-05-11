@@ -39,44 +39,44 @@ const Navbar = () => {
     else {
         setColor(false);
     }
-}
+  }
 
-window.addEventListener('scroll', changeColor)
+  window.addEventListener('scroll', changeColor)
 
-return (
-  <nav className={color ? 'nav-color' : 'no-color'}>
-    <div className="container mx-auto flex justify-between items-center py-2">
-      <div className="flex items-center space-x-6">
-        <div className='logo-txt'>
-          <Link to={'/'}><img id='logo-img' src='/vigym.png' alt='logo' /></Link>
-          <Link to={'/'}>iGym</Link>
+  return (
+    <nav className={color ? 'nav-color' : 'no-color'}>
+      <div className="container mx-auto flex justify-between items-center py-2">
+        <div className="flex items-center space-x-6">
+          <div className='logo-txt'>
+            <Link to={'/'}><img id='logo-img' src='/vigym.png' alt='logo' /></Link>
+            <Link to={'/'}>iGym</Link>
+          </div>
+          <Link className='decoration' to={'/exercises'}>Exercises</Link>
+          <div className="relative" ref={dropdownRef}>
+            <span className="cursor-pointer decoration" onClick={toggleDropdown}>Workouts</span>
+            {dropdownVisible && (
+              <div className="absolute text-center mt-2 space-y-2 bg-white bg-opacity-70 text-blue-500 rounded shadow-md z-10">
+                <Link to="/workouts" className="block px-4 py-2 hover:bg-blue-500 hover:text-white" onClick={() => setDropdownVisible(false)}>View</Link>
+                <Link to="/create-workout" className="block px-4 py-2 hover:bg-blue-500 hover:text-white" onClick={() => setDropdownVisible(false)}>Create</Link>
+              </div>
+            )}
+          </div>
+          {getToken() && <Link className='decoration' to={'/dashboard'}>Dashboard</Link>}
+          {getToken() && <Link className='decoration' to={'/trainer'}>AI Trainer</Link>}
         </div>
-        <Link to={'/exercises'}>Exercises</Link>
-        <div className="relative" ref={dropdownRef}>
-          <span className="cursor-pointer" onClick={toggleDropdown}>Workouts</span>
-          {dropdownVisible && (
-            <div className="absolute text-center mt-2 space-y-2 bg-white bg-opacity-70 text-blue-500 rounded shadow-md z-10">
-              <Link to="/workouts" className="block px-4 py-2 hover:bg-blue-500 hover:text-white" onClick={() => setDropdownVisible(false)}>View</Link>
-              <Link to="/create-workout" className="block px-4 py-2 hover:bg-blue-500 hover:text-white" onClick={() => setDropdownVisible(false)}>Create</Link>
-            </div>
+        <div className="flex items-center space-x-6">
+        <Link className='decoration' to={'/store'}>Store</Link>
+          {!getToken() && (
+            <>
+              <Link className='decoration' to={'/login'}>Sign In</Link>
+              <Link id='start-action-call' to={'/signup'} className="bg-white hover:bg-gray-100 text-blue-500 px-4 py-1 rounded">Get Started</Link>
+            </>
           )}
+          {getToken() && <button onClick={logout} className="px-4 py-1 rounded decoration">Logout</button>}
         </div>
-        {getToken() && <Link to={'/dashboard'}>Dashboard</Link>}
-        {getToken() && <Link to={'/trainer'}>AI Trainer</Link>}
       </div>
-      <div className="flex items-center space-x-6">
-      <Link to={'/store'}>Store</Link>
-        {!getToken() && (
-          <>
-            <Link to={'/login'}>Sign In</Link>
-            <Link id='start-action-call' to={'/signup'} className="bg-white hover:bg-gray-100 text-blue-500 px-4 py-1 rounded">Get Started</Link>
-          </>
-        )}
-        {getToken() && <button onClick={logout} className="px-4 py-1 rounded">Logout</button>}
-      </div>
-    </div>
-  </nav>
-);
+    </nav>
+  );
 };
 
 export default Navbar;

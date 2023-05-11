@@ -62,7 +62,7 @@ const CreateWorkouts = () => {
     
     return (
 
-        <div className="bg-gray-100 min-h-screen pt-16">
+        <div className="bg-gradient-to-r from-custom-g-blue-1 via-custom-g-blue-2 to-custom-g-blue-1 min-h-screen pt-16">
             <div className="container mx-auto px-4">
                 <div className="bg-white shadow-md rounded-lg p-4">
                 <div className="mb-4">
@@ -161,23 +161,23 @@ const CreateWorkouts = () => {
           </div>
         ))}
         {cardio.type ? (
-          <h3 className="text-xl font-bold">Cardio: {cardio.type}</h3>
+          <h3 className="text-xl font-bold text-gray-100">Cardio: {cardio.type}</h3>
         ) : (
-          <h3 className="text-xl font-bold">Cardio: None</h3>
+          <h3 className="text-xl font-bold text-gray-100">Cardio: None</h3>
         )}
         {cardio.time ? (
-          <h5 className="text-lg font-semibold">{cardio.time} min</h5>
+          <h5 className="text-lg font-semibold text-gray-100">{cardio.time} min</h5>
         ) : (
           <></>
         )}
         <br></br>
-        <h3 className="text-xl font-bold">{exercises.length} Exercises</h3>
+        <h3 className="text-xl font-bold text-gray-100">{exercises.length} Exercises</h3>
       </div>
       <br></br>
       <br></br>
       {
         exercises.length ? <button
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-white shadow-md rounded-lg p-4 text-blue-500 px-4 py-2"
         onClick={submitWorkout}
         disabled={submitDisabled}
       >

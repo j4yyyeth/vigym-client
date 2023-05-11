@@ -54,7 +54,7 @@ const Dashboard = () => {
   };  
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-16">
+    <div className="bg-gradient-to-r from-custom-g-blue-1 via-custom-g-blue-2 to-custom-g-blue-1 min-h-screen pt-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {workouts?.map((workout, i) => (
@@ -134,13 +134,12 @@ const Dashboard = () => {
           ))}
         </div>
         {workouts && workouts.length > 0 ? (
-          <div className="mt-8 flex justify-center">
+          <div className="bg-white shadow-md rounded-lg flex-column justify-center mt-8">
             <BarChart />
           </div>
         ) : (
           <></>
         )}
-        <h3 className="text-2xl font-bold my-8 text-center">Schedule</h3>
         <div className="flex justify-center">
           <Calendar workouts={workouts} user={user} userSchedule={getUserSchedule} />
         </div>

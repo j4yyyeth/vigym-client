@@ -14,11 +14,10 @@ html {
   overflow: overlay;
 }
 
-
 body {
   margin: 0;
   padding: 0;
-  background-color: #065cd4;
+  background: linear-gradient(to right, #3B82F6, #008DF2, #3B82F6);
   font-family: 'Montserrat', sans-serif;
   /* background-image: url('./gym3.jpg');
   background-size: cover;
@@ -38,46 +37,46 @@ nav {
   font-size: 1.5rem;
   letter-spacing: 1.3px;
   color: #0075C9;
-  background-color: rgb(239, 239, 239);
+  background-color: rgb(255, 255, 255);
 }
 
-nav a {
+.decoration {
   position: relative;
 }
 
 .nav-color {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   color: rgba(255, 255, 255);
   width: 100%;
 }
 
-nav a::before, nav a::after {
+.decoration::before, .decoration::after {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: #2fc2fc;
+  background-color: #008DF2;
   transform: scaleY(0);
   transition: transform 0.5s ease;
 }
 
-nav a::before {
+.decoration::before {
   left: -8px;
   transform-origin: center top;
 }
 
-nav a:hover::before {
+.decoration:hover::before {
   transform-origin: center bottom;
   transform: scaleY(1);
 }
 
-nav a::after {
+.decoration::after {
   right: -8px;
   transform-origin: center bottom;
 }
 
-nav a:hover::after {
+.decoration:hover::after {
   transform-origin: center top;
   transform: scaleY(1);
 }
@@ -120,13 +119,13 @@ nav a:hover::after {
 }
 
 #start-action-call {
-  background-color: #0075C9;
+  background-color: #008DF2;
   padding: 5px;
   color: #F7F7F7;
 }
 
 #start-action-call:hover {
-  background-color: #008DF2;
+  background-color: #008DF2;;
   transition: .3s;
 }
 
@@ -167,10 +166,6 @@ nav a:hover::after {
   color: white;
 }
 
-/* input {
-  background-color: #F7F7F7;
-} */
-
 .calendar {
   display: flex;
   padding: 50px;
@@ -181,8 +176,8 @@ nav a:hover::after {
   width: 3.5em;
   height: 3.5em;
   border: 3px solid transparent;
-  border-top-color: #58b9ff;
-  border-bottom-color: #58b9ff;
+  border-top-color: #000000;
+  border-bottom-color: #000000;
   border-radius: 50%;
   animation: spin 1.5s linear infinite;
 }
@@ -193,7 +188,7 @@ nav a:hover::after {
   margin: auto;
   width: 0.75em;
   height: 0.75em;
-  border: 3px solid #58b9ff;
+  border: 3px solid #ffffff;
   border-radius: 50%;
   animation: pulse 1s alternate ease-in-out infinite;
 }

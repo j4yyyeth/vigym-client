@@ -1,10 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { baseUrl } from "../services/baseUrl";
+import { LoadingContext } from "../context/loadingContext";
 
 const Trainer = () => {
   const [userMessage, setUserMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Array<{ type: "user" | "AI"; content: string }>>([]);
+  const loadingContext = useContext(LoadingContext);
+
+  const user = loadingContext ? loadingContext.user : undefined;
 
   const sendMessage = async () => {
     setMessages([...messages, { type: "user", content: userMessage }]);
@@ -16,7 +20,10 @@ const Trainer = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({
+          message: userMessage,
+          userId: user?._id
+        }),
       });
 
       if (!response.ok) {
@@ -41,7 +48,7 @@ const Trainer = () => {
   }, [messages]);
 
   return (
-    <div className="bg-gray-300 min-h-screen">
+    <div className=" min-h-screen">
       <div className="container mx-auto px-4 flex flex-col h-full">
         <div className="mb-16">
           <br></br>
@@ -49,7 +56,7 @@ const Trainer = () => {
             <div
               key={index}
               className={`bg-white shadow-md rounded-lg p-4 mb-4 ${
-                message.type === "user" ? "text-custom-light-blue" : "text-custom-ai-blue"
+                message.type === "user" ? "text-custom-light-blue" : "text-gray-500"
               }`}
             >
               <h3 className="message-from-AI">{message.content}</h3>
@@ -58,11 +65,11 @@ const Trainer = () => {
           <div ref={messagesEndRef} />
           {isLoading && (
             <div className="flex justify-center">
-            <div id="loading"></div>
+            <div id="loading" className="m-2"></div>
             </div>
           )}
         </div>
-        <div className="flex items-center fixed bottom-0 left-0 w-full px-4 bg-gray-100 pb-4">
+        <div className="flex items-center fixed bottom-0 left-0 w-full px-4 pb-4">
           <input
             type="text"
             value={userMessage}
@@ -72,7 +79,7 @@ const Trainer = () => {
           />
           <button
             onClick={sendMessage}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-custom-white shadow-md rounded-md p-4 text-blue-600 px-4 py-2 m-2 text-center"
           >
             →
           </button>

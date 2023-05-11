@@ -45,7 +45,7 @@ const BarChart = () => {
       {workouts && workouts.length > 0 && (
         <>
           <label></label>
-          <select id="workout-select" onChange={handleWorkoutChange}>
+          <select className="rounded-lg" id="workout-select" onChange={handleWorkoutChange}>
             {workouts.map((e, i) => (
               <option key={i} value={i}>Workout {i + 1}</option>
             ))}

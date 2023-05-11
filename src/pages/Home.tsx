@@ -1,6 +1,6 @@
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-400 via-custom-light-blue to-blue-400 flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-r from-custom-g-blue-1 via-custom-g-blue-2 to-custom-g-blue-1 flex flex-col items-center justify-center">
       <h1 className="text-white font-bold text-5xl mb-6">Welcome to ViGym</h1>
       <p className="text-white text-lg mb-10 text-center mx-4">
         ViGym is a full stack fitness app that lets you create workouts, view workouts, houses an AI trainer, a library of exercises, and is a great way to achieve your fitness goals.

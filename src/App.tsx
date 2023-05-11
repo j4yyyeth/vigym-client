@@ -13,6 +13,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Trainer from './pages/Trainer';
 import Comments from './pages/Comments';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
         <Route path='*' element={<NotFound />}/>
 
       </Routes>
+      <ScrollToTop />
       {/* <MusicPlayer /> */}
     </div>
   );
