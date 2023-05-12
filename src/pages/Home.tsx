@@ -3,7 +3,6 @@ import { FaFacebook, FaInstagram, FaTiktok, FaTwitter, FaChevronDown, FaChevronU
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  // Manage the open question state
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
 
   const questions = [
@@ -30,9 +29,6 @@ const Home = () => {
         </div>
       </div>
     <div>
-      {/*...rest of your code...*/}
-      
-      {/* Features section */}
       <div className="w-full py-20 bg-white px-8">
         <h2 className="text-center text-custom-black font-bold text-3xl mb-8">Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -64,8 +60,6 @@ const Home = () => {
         </div>
       </div>
 
-
-      {/* FAQ section */}
       <div className="w-full py-20 bg-custom-black">
         <h2 className="text-center text-white font-bold text-3xl mb-8">FAQ</h2>
         <div className="flex flex-wrap justify-around px-4">
