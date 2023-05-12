@@ -7,10 +7,12 @@ const Trainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Array<{ type: "user" | "AI"; content: string }>>([]);
   const loadingContext = useContext(LoadingContext);
+  const [conversationHistory, setConversationHistory] = useState("");
 
   const user = loadingContext ? loadingContext.user : undefined;
 
   const sendMessage = async () => {
+    setConversationHistory(conversationHistory => `${conversationHistory}\nUser: ${userMessage}`);
     setMessages([...messages, { type: "user", content: userMessage }]);
     setUserMessage("");
     setIsLoading(true);
@@ -22,7 +24,8 @@ const Trainer = () => {
         },
         body: JSON.stringify({
           message: userMessage,
-          userId: user?._id
+          userId: user?._id,
+          conversationHistory
         }),
       });
 
@@ -31,6 +34,7 @@ const Trainer = () => {
       }
 
       const responseData = await response.json();
+      setConversationHistory(conversationHistory => `${conversationHistory}\nAssistant: ${responseData.response.trim()}`);
       setMessages([...messages, { type: "user", content: userMessage }, { type: "AI", content: responseData.response }]);
     } catch (err) {
       console.log(err);
@@ -48,7 +52,7 @@ const Trainer = () => {
   }, [messages]);
 
   return (
-    <div className=" min-h-screen">
+    <div className=" min-h-screen pt-20">
       <div className="container mx-auto px-4 flex flex-col h-full">
         <div className="mb-16">
           <br></br>
