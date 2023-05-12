@@ -1,48 +1,112 @@
-import { useState, useEffect } from 'react';
-import useSound from 'use-sound';
+import { useState, useRef, useEffect } from "react";
+import { FaPlayCircle, FaPauseCircle, FaArrowCircleRight, FaArrowCircleLeft, FaExpandAlt, FaCompressAlt } from "react-icons/fa";
 
-const MusicPlayer = () => {
-    const song = '../music.mp3';
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [play, { pause, duration, sound }] = useSound(song);
-
-    const playingButton = () => {
-        if (isPlaying) {
-          pause(); // this will pause the audio
-          setIsPlaying(false);
-        } else {
-          play(); // this will play the audio
-          setIsPlaying(true);
-        }
-      };
-
-      return (
-        <div className="component">
-          <h2>Playing Now</h2>
-          <img className="musicCover" src="" alt='cover'/>
-          <div>
-            <h3 className="title">SONG</h3>
-            <p className="subTitle">SONG</p>
-          </div>
-          <div>
-            <button className="playButton">
-              Play
-            </button>
-            {!isPlaying ? (
-              <button className="playButton" onClick={playingButton}>
-                PAUSE
-              </button>
-            ) : (
-              <button className="playButton" onClick={playingButton}>
-                Play
-              </button>
-            )}
-            <button className="playButton">
-                Play
-            </button>
-          </div>
-        </div>
-      );
+type Track = {
+  title: string;
+  url: string;
 };
 
-export default MusicPlayer;
+const tracks: Track[] = [
+  { title: "Miami Sky - Karl Casey", url: "./miamiSky.mp3" },
+  { title: "Much Higher - Causmic", url: "./muchHigher.mp3" },
+  { title: "Hackers - Karl Casey", url: "./hackers.mp3" }
+];
+
+interface AudioPlayerProps {
+  className?: string;
+}
+
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ className }) => {
+  const [trackIndex, setTrackIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current?.play();
+    } else {
+      audioRef.current?.pause();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    audioRef.current?.play();
+  }, [trackIndex]);
+  
+
+  const goToNextTrack = () => {
+    if (trackIndex < tracks.length - 1) {
+      setTrackIndex(trackIndex + 1);
+    } else {
+      setTrackIndex(0);
+    }
+  };
+
+  const goToPreviousTrack = () => {
+    if (trackIndex > 0) {
+      setTrackIndex(trackIndex - 1);
+    } else {
+      setTrackIndex(tracks.length - 1);
+    }
+  };
+
+  return (
+    <div className={`fixed bottom-0 left-0 bg-custom-black text-blue-400 max-w-lg p-4 rounded-full flex items-center justify-center ${className}`}>
+      <audio
+        src={tracks[trackIndex].url}
+        ref={audioRef}
+        onEnded={goToNextTrack}
+      />
+      <div className="w-20 h-30 flex items-center justify-center">
+  {isPlaying ? (
+    <img src='./equalizer.gif' alt="Equalizer" className="w-full h-full" /> 
+  ) : (
+    <p className="text-white">...</p>
+  )}
+</div>
+
+      {isMinimized ? (
+        <button 
+        className="text-white p-2 rounded-md m-2" 
+        onClick={() => setIsMinimized(false)}
+      >
+        <FaExpandAlt />
+      </button>
+      ) : (
+        <>
+        <h2 className="m-2">{tracks[trackIndex].title}</h2>
+        <button 
+            className="text-white p-2 rounded-md m-2" 
+            onClick={goToPreviousTrack}
+          >
+            <FaArrowCircleLeft size={30} />
+          </button>
+          <button 
+            className="text-white p-2 rounded-md m-2" 
+            onClick={() => setIsPlaying(!isPlaying)}
+          >
+            {isPlaying ? <FaPauseCircle size={30} /> : <FaPlayCircle size={30} />}
+          </button>
+          <button 
+            className="text-white p-2 rounded-md m-2" 
+            onClick={goToNextTrack}
+          >
+            <FaArrowCircleRight size={30} />
+          </button>
+          <button
+                      className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-custom-black text-white p-2 rounded-3xl m-2"
+                      onClick={() => setIsMinimized(true)}
+                    >
+                      <FaCompressAlt size={20}/>
+                    </button>
+                  </>
+                )}
+              </div>
+            );
+          }
+          
+          export default AudioPlayer;
+          
+           
+

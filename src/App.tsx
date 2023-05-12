@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, Outlet, Navigate,Location, useLocation } from 'react-router-dom';
+import { Route, Routes, Outlet, Navigate, useLocation } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import MusicPlayer from './components/MusicPlayer';
@@ -34,17 +34,17 @@ function App() {
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
 
-  const showNavbar = !isLoginPage && !isSignupPage;
+  const show = !isLoginPage && !isSignupPage;
   
   return (
     <div className="App">
-      { showNavbar && <Navbar /> }
+      { show && <Navbar /> }
       <Routes>
 
         <Route path='/' element={<Home />} />
-        {/* <Route path='/exercises' element={<Exercises />} /> */}
         <Route path='/workouts' element={<Workouts />} />
         <Route path='/store' element={<Store />} />
+        <Route path='/exercises' element={<Exercises />} />
 
         <Route element={<LoggedOut />}>
             <Route path="/signup" element={<Signup />} />
@@ -61,7 +61,7 @@ function App() {
 
       </Routes>
       <ScrollToTop />
-      {/* <MusicPlayer /> */}
+      { show && <MusicPlayer className="fixed bottom-0 left-0 p-4 m-2" />}
     </div>
   );
 }
