@@ -22,8 +22,15 @@ const BarChart = () => {
   };
 
   const generateColors = (workouts) => {
-    return workouts.map(() => `rgb(${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 200)}, ${Math.floor(Math.random() * 256)})`);
+    let colors = [];
+    workouts.forEach(workout => {
+      workout.exercises.forEach(() => {
+        colors.push(`rgb(${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 200)}, ${Math.floor(Math.random() * 256)})`);
+      });
+    });
+    return colors;
   };
+  
 
   const generateDatasets = (workouts, selectedIndex, colors) => {
     return workouts[selectedIndex].exercises.map((e, index) => ({
