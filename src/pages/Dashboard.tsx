@@ -6,10 +6,11 @@ import ExerciseInput from "../components/ExerciseInput";
 import CardioInput from "../components/CardioInput";
 import BarChart from "../components/BarChart";
 import Calendar from "../components/Calendar";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
 
-  const { user, workouts, getUserWorkouts, updateWorkout, getUserSchedule } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { isLoading, user, workouts, getUserWorkouts, updateWorkout, getUserSchedule } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
   const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
   const [isEditing, setIsEditing] = useState<Record<string, boolean>>({});
 
@@ -36,7 +37,7 @@ const Dashboard = () => {
       .catch((err) => {
         console.log(err, "error!");
       })
-  }
+  };
 
   const handleEdit = (workoutId: any) => {
     const workoutToUpdate = updatedWorkouts.find((e) => e._id === workoutId);
@@ -118,7 +119,7 @@ const Dashboard = () => {
             />
               <div className="mt-4 flex justify-end">
                 <button
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded mr-2"
+                  className="bg-gradient-to-r from-custom-red-1 via-custom-red-2 to-custom-red-1 text-white px-4 py-2 rounded mr-2"
                   onClick={() => handleDelete(workout._id)}
                 >
                   Delete
@@ -134,15 +135,17 @@ const Dashboard = () => {
           ))}
         </div>
         {workouts && workouts.length > 0 ? (
-          <div className="bg-white shadow-md rounded-lg flex-column justify-center mt-8">
-            <BarChart />
-          </div>
-        ) : (
-          <></>
-        )}
-        <div className="flex justify-center">
-          <Calendar workouts={workouts} user={user} userSchedule={getUserSchedule} />
-        </div>
+          <>
+            <div className="bg-white shadow-md rounded-lg flex-column justify-center mt-8">
+              <BarChart />
+            </div>
+            <div className="flex justify-center">
+              <Calendar workouts={workouts} user={user} userSchedule={getUserSchedule} />
+            </div>
+          </>
+        ) :
+        <Link className="bg-white shadow-md rounded-md p-4 text-blue-500 px-4 py-2 text-center" to='/create-workout'>Create a workout</Link>
+        }
       </div>
     </div>
   );

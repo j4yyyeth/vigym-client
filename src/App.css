@@ -14,6 +14,11 @@ html {
   overflow: overlay;
 }
 
+.red-btn {
+  background: linear-gradient(to right, #ff4848, #ff6034, #ff4848);
+  color: white;
+}
+
 body {
   margin: 0;
   padding: 0;

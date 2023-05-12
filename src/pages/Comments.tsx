@@ -100,6 +100,7 @@ const Comments: React.FC = () => {
                 {comment.content}
               </p>
             </div>
+
           ))}
         </div>
       </div>
