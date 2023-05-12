@@ -57,15 +57,15 @@ const Signup = () => {
                     <img src='/vigym.png' alt="logo" height={215} width={215} className="mx-auto" />
                     <form onSubmit={handleSubmit} className="space-y-6" style={{ width: '300px' }}>
                         <label className="block text-lg font-medium text-gray-700">Email</label>
-                        <input type='email' name="email" value={newUser.email} onChange={handleChange} className="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-base"></input>
+                        <input type='email' name="email" value={newUser.email} onChange={handleChange} className="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-base"></input>
                         <label className="block text-lg font-medium text-gray-700">Username</label>
-                        <input type='username' name="username" value={newUser.username} onChange={handleChange} className="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-base"></input>
+                        <input type='username' name="username" value={newUser.username} onChange={handleChange} className="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-base"></input>
                         <label className="block text-lg font-medium text-gray-700">Password</label>
-                        <input type='password' name="password" value={newUser.password} onChange={handleChange} className="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-base"></input>
-                        <button type="submit" className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-md text-white bg-custom-blue hover:bg-custom-light-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-blue">Sign Up</button>
+                        <input type='password' name="password" value={newUser.password} onChange={handleChange} className="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-base"></input>
+                        <button type="submit" className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-md text-white bg-custom-blue hover:bg-custom-light-blue">Sign Up</button>
                         <h4 className="err-msg text-red-500 text-center">{message}</h4>
                     </form>
-                    <p className="mt-2 text-center text-md text-gray-600">Already a user?{' '}<Link to="/login" className="font-medium text-custom-blue hover:text-custom-light-blue">Sign In</Link></p>
+                    <p className="mt-2 text-center text-md text-gray-600">Already a user?{' '}<Link to="/login" className="font-medium text-blue-500 hover:text-custom-light-blue">Sign In</Link></p>
                 </div>
             </div>
         </div>

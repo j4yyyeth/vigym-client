@@ -24,7 +24,7 @@ const Home = () => {
           </Link>
 
             <Link to="login" className="bg-gradient-to-r from-custom-red-1 via-custom-red-2 to-custom-red-1 text-white font-semibold py-2 px-4 rounded-md shadow-md">
-              Log In
+              Sign In
             </Link>
           </div>
         </div>
