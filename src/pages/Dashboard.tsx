@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => {
 
-  const { isLoading, user, workouts, getUserWorkouts, updateWorkout, getUserSchedule } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
+  const { user, workouts, getUserWorkouts, updateWorkout, getUserSchedule } = useContext(LoadingContext) || { getUserWorkouts: () => {} };
   const [updatedWorkouts, setUpdatedWorkouts] = useState<any[]>([]);
   const [isEditing, setIsEditing] = useState<Record<string, boolean>>({});
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
         getUserWorkouts();
       })
       .catch((err) => {
-        console.log(err, "error!");
+        console.log(err);
       })
   };
 
@@ -50,7 +50,7 @@ const Dashboard = () => {
         setUpdatedWorkouts(newUpdatedWorkouts);
       })
       .catch((err) => {
-        console.log(err, "EDIT ERROR!");
+        console.log(err);
       });
   };  
 
@@ -59,19 +59,41 @@ const Dashboard = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {workouts?.map((workout, i) => (
-            <div
-              className="bg-white shadow-md rounded-lg p-4"
-              key={i}
-            >
+            <div className="bg-white shadow-md rounded-lg p-4" key={i}>
               <h4 className="text-xl font-bold mb-2">Workout {i + 1}</h4>
               <hr className="mb-4" />
               {workout.exercises.map((exercise, j) => (
-              <ExerciseInput
-                key={j}
-                exercise={exercise.exercise}
-                sets={exercise.sets}
-                reps={exercise.reps}
-                weight={exercise.weight}
+                <ExerciseInput
+                  key={j}
+                  exercise={exercise.exercise}
+                  sets={exercise.sets}
+                  reps={exercise.reps}
+                  weight={exercise.weight}
+                  onInputChange={(field, value) => {
+                    const workoutIndex = updatedWorkouts.findIndex(w => w._id === workout._id);
+                    const newWorkouts = [...updatedWorkouts];
+
+                    if (workoutIndex === -1) {
+                      newWorkouts.push({ ...workout });
+                    }
+
+                    const targetWorkout = newWorkouts[workoutIndex !== -1 ? workoutIndex : newWorkouts.length - 1];
+                    targetWorkout.exercises[j] = {...targetWorkout.exercises[j],[field]: value};
+
+                    setUpdatedWorkouts(newWorkouts);
+                  }}
+                  focusId={`${workout._id}-${j}`}
+                  focus={isEditing[workout._id]}
+                  onInputFocus={() => {
+                    if (!isEditing[workout._id]) {
+                      setIsEditing({ ...isEditing, [workout._id]: true });
+                    }
+                  }}
+                />
+              ))}
+              <CardioInput
+                type={workout.cardio.type}
+                time={workout.cardio.time}
                 onInputChange={(field, value) => {
                   const workoutIndex = updatedWorkouts.findIndex(w => w._id === workout._id);
                   const newWorkouts = [...updatedWorkouts];
@@ -81,42 +103,11 @@ const Dashboard = () => {
                   }
 
                   const targetWorkout = newWorkouts[workoutIndex !== -1 ? workoutIndex : newWorkouts.length - 1];
-                  targetWorkout.exercises[j] = {
-                    ...targetWorkout.exercises[j],
-                    [field]: value,
-                  };
+                  targetWorkout.cardio = {...targetWorkout.cardio,[field]: value};
 
                   setUpdatedWorkouts(newWorkouts);
                 }}
-                focusId={`${workout._id}-${j}`}
-                focus={isEditing[workout._id]}
-                onInputFocus={() => {
-                  if (!isEditing[workout._id]) {
-                    setIsEditing({ ...isEditing, [workout._id]: true });
-                  }
-                }}
               />
-            ))}
-           <CardioInput
-              type={workout.cardio.type}
-              time={workout.cardio.time}
-              onInputChange={(field, value) => {
-                const workoutIndex = updatedWorkouts.findIndex(w => w._id === workout._id);
-                const newWorkouts = [...updatedWorkouts];
-
-                if (workoutIndex === -1) {
-                  newWorkouts.push({ ...workout });
-                }
-
-                const targetWorkout = newWorkouts[workoutIndex !== -1 ? workoutIndex : newWorkouts.length - 1];
-                targetWorkout.cardio = {
-                  ...targetWorkout.cardio,
-                  [field]: value,
-                };
-
-                setUpdatedWorkouts(newWorkouts);
-              }}
-            />
               <div className="mt-4 flex justify-end">
                 <button
                   className="bg-gradient-to-r from-custom-red-1 via-custom-red-2 to-custom-red-1 text-white px-4 py-2 rounded mr-2"
@@ -143,8 +134,7 @@ const Dashboard = () => {
               <Calendar workouts={workouts} user={user} userSchedule={getUserSchedule} />
             </div>
           </>
-        ) :
-        <Link className="bg-white shadow-md rounded-md p-4 text-blue-500 px-4 py-2 text-center" to='/create-workout'>Create a workout</Link>
+          ) : <Link className="bg-white shadow-md rounded-md p-4 text-blue-500 px-4 py-2 text-center" to='/create-workout'>Create a workout</Link>
         }
       </div>
     </div>

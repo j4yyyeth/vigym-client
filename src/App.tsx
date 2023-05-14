@@ -33,12 +33,16 @@ function App() {
 
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
+  const isCreateWorkout = location.pathname === '/create-workout';
+  const isTrainer = location.pathname === '/trainer';
 
-  const show = !isLoginPage && !isSignupPage;
+
+  const showNav = !isLoginPage && !isSignupPage;
+  const showMusic = !isLoginPage && !isSignupPage && !isCreateWorkout && !isTrainer;
   
   return (
-    <div className="App">
-      { show && <Navbar /> }
+    <>
+      { showNav && <Navbar /> }
       <Routes>
 
         <Route path='/' element={<Home />} />
@@ -57,13 +61,14 @@ function App() {
           <Route path='/create-workout' element={<CreateWorkouts />} />
           <Route path='/comments/:workoutId' element={<Comments />} />
         </Route>
+
         <Route path='*' element={<NotFound />}/>
 
       </Routes>
       <ScrollToTop />
-      { show && <MusicPlayer className="fixed bottom-0 left-0 p-4 m-2" />}
-    </div>
+      { showMusic && <MusicPlayer className="fixed bottom-0 left-0 p-4 m-2" />}
+    </>
   );
-}
+};
 
 export default App;

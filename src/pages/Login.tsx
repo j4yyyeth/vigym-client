@@ -4,7 +4,6 @@ import { AuthContext } from "../context/authContext";
 import { post } from "../services/authService";
 import { Link } from "react-router-dom";
 
-
 const Login = () => {
 
     const context = useContext(AuthContext);
@@ -20,18 +19,17 @@ const Login = () => {
             username: "",
             password: ""
         }
-    )
-
+    );
     const [ message, setMessage ] = useState('');
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setthisUser((recent)=>({...recent, [e.target.name]: e.target.value}))
+        setthisUser((recent)=>({...recent, [e.target.name]: e.target.value}));
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
 
         post('/auth/login', thisUser)
             .then((results) => {
@@ -53,7 +51,7 @@ const Login = () => {
         <div className="flex items-center justify-center min-h-screen bg-cover" style={{ backgroundImage: 'url(/gym-bg.jpg)' }}>
             <div className="flex items-center justify-center p-10 rounded-lg shadow-lg" style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
                 <div className="max-w-md w-full space-y-8">
-                <img src='/vigym.png' alt="logo" height={215} width={215} className="mx-auto" />
+                    <img src='/vigym.png' alt="logo" height={215} width={215} className="mx-auto" />
                     <form onSubmit={handleSubmit} className="mt-8 space-y-6" style={{ width: '300px' }}>
                         <label className="block text-lg font-medium text-gray-700">Username</label>
                         <input type='username' name="username" value={thisUser.username} onChange={handleChange} className="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-base"></input>
@@ -69,4 +67,4 @@ const Login = () => {
     );          
 }
 
-export default Login
+export default Login;

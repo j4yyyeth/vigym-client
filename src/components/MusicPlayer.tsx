@@ -51,7 +51,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ className }) => {
     }
   };
 
-  return (
+  return (  
     <div className={`fixed bottom-0 left-0 bg-custom-black text-blue-400 max-w-lg p-4 rounded-full flex items-center justify-center ${className}`}>
       <audio
         src={tracks[trackIndex].url}
@@ -59,24 +59,23 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ className }) => {
         onEnded={goToNextTrack}
       />
       <div className="w-20 h-30 flex items-center justify-center">
-  {isPlaying ? (
-    <img src='./equalizer.gif' alt="Equalizer" className="w-full h-full" /> 
-  ) : (
-    <p className="text-white">...</p>
-  )}
-</div>
-
+        {isPlaying ? (
+          <img src='./equalizer.gif' alt="Equalizer" className="w-full h-full" /> 
+        ) : (
+          <p className="text-white">...</p>
+        )}
+      </div>
       {isMinimized ? (
         <button 
-        className="text-white p-2 rounded-md m-2" 
-        onClick={() => setIsMinimized(false)}
-      >
-        <FaExpandAlt />
-      </button>
+          className="text-white p-2 rounded-md m-2" 
+          onClick={() => setIsMinimized(false)}
+        >
+          <FaExpandAlt />
+        </button>
       ) : (
         <>
-        <h2 className="m-2">{tracks[trackIndex].title}</h2>
-        <button 
+          <h2 className="m-2">{tracks[trackIndex].title}</h2>
+          <button 
             className="text-white p-2 rounded-md m-2" 
             onClick={goToPreviousTrack}
           >
@@ -95,18 +94,15 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ className }) => {
             <FaArrowCircleRight size={30} />
           </button>
           <button
-                      className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-custom-black text-white p-2 rounded-3xl m-2"
-                      onClick={() => setIsMinimized(true)}
-                    >
-                      <FaCompressAlt size={20}/>
-                    </button>
-                  </>
-                )}
-              </div>
-            );
-          }
-          
-          export default AudioPlayer;
-          
-           
+            className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-custom-black text-white p-2 rounded-3xl m-2"
+            onClick={() => setIsMinimized(true)}
+          >
+            <FaCompressAlt size={20}/>
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
 
+export default AudioPlayer;

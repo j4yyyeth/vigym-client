@@ -1,14 +1,13 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import { LoadingContext } from "../context/loadingContext";
-
 import { Link } from "react-router-dom";
+
 interface WorkoutCardProps {
   filter: string | null;
 }
 
 const WorkoutCard: React.FC<WorkoutCardProps> = ({ filter }) => {
-  const { allWorkouts, getAllWorkouts } =
-    useContext(LoadingContext) || { getAllWorkouts: () => {} };
+  const { allWorkouts, getAllWorkouts } = useContext(LoadingContext) || { getAllWorkouts: () => {} };
 
   useEffect(() => {
     getAllWorkouts();
@@ -27,10 +26,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ filter }) => {
   return (
     <div className="container mx-auto px-4 md:w-1/2">
       {filteredWorkouts?.map((workout, i) => (
-        <div
-          className="workout-card bg-white rounded-lg shadow-md p-4 mb-4"
-          key={i}
-        >
+        <div className="workout-card bg-white rounded-lg shadow-md p-4 mb-4" key={i}>
           <h3 className="font-bold text-xl mb-2 bg-blue-500 text-gray-200 p-2 rounded">Created by: <span className="font-bold text-white">{workout.user.username}</span></h3>
           {workout.exercises.map((exercise, j) => (
             <div key={j} className="exercise-card bg-gray-200 bg-opacity-50 rounded-lg shadow-inner p-4 mb-2">

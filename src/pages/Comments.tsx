@@ -6,13 +6,13 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 interface Comment {
+  _id: string;
+  author: {
     _id: string;
-    author: {
-      _id: string;
-      username: string;
-    };
-    content: string;
-  }  
+    username: string;
+  };
+  content: string;
+};  
 
 const Comments: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
@@ -28,8 +28,8 @@ const Comments: React.FC = () => {
     try {
       const response = await axios.get(`${baseUrl}/comments/${workoutId}`);
       setComments(response.data);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.log(err);
     }
   };  
 
@@ -91,16 +91,12 @@ const Comments: React.FC = () => {
         <div>
           <h3 className="text-xl font-bold mb-2 text-gray-100">All Comments:</h3>
           {comments.map((comment) => (
-            <div
-              key={comment._id}
-              className="bg-white shadow-md rounded-lg p-4 mb-4"
-            >
+            <div key={comment._id} className="bg-white shadow-md rounded-lg p-4 mb-4">
               <p>
                 <strong className="font-bold text-blue-600">{comment.author.username}:</strong>{" "}
                 {comment.content}
               </p>
             </div>
-
           ))}
         </div>
       </div>

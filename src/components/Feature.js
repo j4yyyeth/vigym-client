@@ -1,10 +1,10 @@
 import { useInView } from 'react-intersection-observer';
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 const Feature = ({ children }) => {
   const [ref, inView] = useInView({
     triggerOnce: false,
-    threshold: 0.1,
+    threshold: 0.1
   });
 
   const animation = useSpring({

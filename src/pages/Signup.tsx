@@ -20,18 +20,17 @@ const Signup = () => {
             username: "",
             password: ""
         }
-    )
-
+    );
     const [ message, setMessage ] = useState('');
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewUser((recent)=>({...recent, [e.target.name]: e.target.value}))
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
 
         post('/auth/signup', newUser)
             .then((results) => {
@@ -70,6 +69,6 @@ const Signup = () => {
             </div>
         </div>
     ); 
-}
+};
 
 export default Signup;

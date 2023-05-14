@@ -31,7 +31,6 @@ const Workouts = () => {
       </div>
     </div>
   );  
-  
 };
 
 export default Workouts;

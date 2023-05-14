@@ -57,21 +57,16 @@ const Trainer = () => {
         <div className="mb-16">
           <br></br>
           {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`bg-white shadow-md rounded-lg p-4 mb-4 ${
-                message.type === "user" ? "text-custom-light-blue" : "text-gray-500"
-              }`}
-            >
+            <div key={index} className={`bg-white shadow-md rounded-lg p-4 mb-4 ${message.type === "user" ? "text-custom-light-blue" : "text-gray-500"}`}>
               <h3 className="message-from-AI">{message.content}</h3>
             </div>
           ))}
           <div ref={messagesEndRef} />
-          {isLoading && (
-            <div className="flex justify-center">
-            <div id="loading" className="m-2"></div>
-            </div>
-          )}
+            {isLoading && (
+              <div className="flex justify-center">
+                <div id="loading" className="m-2"></div>
+              </div>
+            )}
         </div>
         <div className="flex items-center fixed bottom-0 left-0 w-full px-4 pb-4">
           <input

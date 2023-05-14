@@ -60,7 +60,6 @@ const Navbar = () => {
           {isMobileMenuOpen ? <FiX /> : <FiMenu />}
         </button>
   
-        {/* Use items-center and justify-center when mobile menu is open */}
         <div className={`flex-grow ${isMobileMenuOpen ? "flex-col items-center justify-center" : "flex-row"} space-x-6 ${isMobileMenuOpen ? "block" : "hidden"} lg:flex lg:items-center lg:ml-auto`}>
           <div className='logo-txt'>
             <Link onClick={() => setIsMobileMenuOpen(false)} to={'/'}><img id='logo-img' src='/vigym.png' alt='logo' /></Link>
@@ -98,5 +97,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
