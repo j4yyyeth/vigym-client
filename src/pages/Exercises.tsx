@@ -11,7 +11,7 @@ const Exercises = () => {
 
   useEffect(() => {
     getExercisesLibrary?.()
-  }, []);
+  }, [getExercisesLibrary]);
 
   const uniqueEquipments = Array.from(new Set(exerciseLibrary?.map(e => e.equipment)));
   const uniqueTargets = Array.from(new Set(exerciseLibrary?.map(e => e.target)));
