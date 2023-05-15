@@ -59,11 +59,11 @@ const Calendar = ({ workouts, user, userSchedule }) => {
   };
   
   return (
-    <div className="calendar bg-custom-white rounded-xl m-10 flex-row space-x-3 shadow-xl">
+    <div className="bg-custom-white rounded-xl m-10 flex md:flex-row flex-col gap-3 shadow-xl p-16">
       {daysOfWeek.map((day, index) => (
-        <div key={index}>
+        <div key={index} className="w-full">
           <h4 className="day text-center">{day}</h4>
-          <select className="rounded-lg" value={schedule[index] || ""} onChange={(e) => handleWorkoutChange(index, e)}>
+          <select className="rounded-lg w-full" value={schedule[index] || ""} onChange={(e) => handleWorkoutChange(index, e)}>
             <option value="">Select Workout</option>
             {workouts.map((workout, i) => (
               <option className="text-black text-center" key={i} value={workout._id}>Workout {i + 1}</option>
@@ -72,7 +72,7 @@ const Calendar = ({ workouts, user, userSchedule }) => {
         </div>
       ))}
     </div>
-  );  
+  );        
 };
 
 export default Calendar;

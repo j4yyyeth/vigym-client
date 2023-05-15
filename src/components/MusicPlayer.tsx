@@ -31,8 +31,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ className }) => {
   }, [isPlaying]);
 
   useEffect(() => {
-    audioRef.current?.play();
-  }, [trackIndex]);
+    if (isPlaying) {
+      audioRef.current?.play();
+    }
+  }, [trackIndex, isPlaying]);  
   
 
   const goToNextTrack = () => {
@@ -52,7 +54,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ className }) => {
   };
 
   return (  
-    <div className={`fixed bottom-0 left-0 bg-custom-black text-blue-400 max-w-lg p-4 rounded-full flex items-center justify-center ${className}`}>
+    <div className={`music fixed bottom-0 left-0 bg-custom-black text-blue-400 max-w-lg p-4 rounded-full flex items-center justify-center ${className}`}>
       <audio
         src={tracks[trackIndex].url}
         ref={audioRef}

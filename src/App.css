@@ -31,15 +31,9 @@ nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 3rem;
   font-family: 'Bebas Neue', cursive;
   font-size: 1.5rem;
   letter-spacing: 1.3px;
-  color: #0075C9;
-  background-color: rgb(255, 255, 255);
 }
 
 .decoration {
@@ -83,7 +77,6 @@ nav {
   transform: scaleY(1);
 }
 
-
 #logo-img {
   width: 7rem;
   margin-bottom: 7px;
@@ -120,20 +113,30 @@ nav {
   color: #0075C9;
 }
 
-#start-action-call {
-  background-color: #008DF2;
-  padding: 5px;
-  color: #F7F7F7;
+.landing-image {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -moz-user-select:-moz-none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 #workout-gif {
   border-radius: 80px;
   border: 5px solid #0075c9;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -moz-user-select:-moz-none;
+  -ms-user-select:none;
+  user-select:none
 }
 
-.calendar {
-  display: flex;
-  padding: 50px;
+@media (max-width: 680px) {
+  .music {
+    display: none;
+  }
 }
 
 #loading {
