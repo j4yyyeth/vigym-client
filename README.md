@@ -2,6 +2,8 @@
 
 ViGym is a full-stack web-app based around fitness.
 
+![Screen Shot 2023-05-15 at 1 45 00 PM](https://github.com/j4yyyeth/vigym-client/assets/113713677/8d68138e-de2f-4fe4-a8f5-52565fe33bdb)
+
 ## Features
 - **Workouts**: Users can create, view, share, and comment on workouts.
 - **Dashboard**: Users have a dashboard where they can analyze and edit their workouts, as well as create a schedule.
